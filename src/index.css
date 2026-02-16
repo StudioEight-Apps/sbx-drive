@@ -6,6 +6,60 @@
 
 @layer base {
   :root {
+    --background: 40 20% 97%;
+    --foreground: 40 10% 10%;
+
+    --card: 40 15% 93%;
+    --card-foreground: 40 10% 10%;
+
+    --popover: 40 15% 95%;
+    --popover-foreground: 40 10% 10%;
+
+    --primary: 40 10% 10%;
+    --primary-foreground: 40 20% 97%;
+
+    --secondary: 40 10% 90%;
+    --secondary-foreground: 40 10% 10%;
+
+    --muted: 40 10% 90%;
+    --muted-foreground: 40 5% 45%;
+
+    --accent: 40 10% 10%;
+    --accent-foreground: 40 20% 97%;
+
+    --destructive: 0 100% 61%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 40 10% 87%;
+    --input: 40 10% 87%;
+    --ring: 43 96% 56%;
+
+    --radius: 0.75rem;
+
+    /* SBX Custom Tokens */
+    --sbx-base: 40 20% 97%;
+    --sbx-card: 40 15% 93%;
+    --sbx-elevated: 40 12% 89%;
+    --sbx-border: 40 10% 87%;
+    --sbx-border-subtle: 40 8% 80%;
+    --sbx-text-primary: 40 10% 10%;
+    --sbx-text-secondary: 40 5% 45%;
+    --sbx-text-tertiary: 40 4% 60%;
+    --sbx-accent: 43 96% 56%;
+    --sbx-accent-hover: 43 90% 48%;
+    --sbx-gold: 43 96% 56%;
+
+    --sidebar-background: 40 15% 93%;
+    --sidebar-foreground: 40 10% 10%;
+    --sidebar-primary: 43 96% 56%;
+    --sidebar-primary-foreground: 40 10% 10%;
+    --sidebar-accent: 40 10% 90%;
+    --sidebar-accent-foreground: 40 10% 10%;
+    --sidebar-border: 40 10% 87%;
+    --sidebar-ring: 43 96% 56%;
+  }
+
+  .dark {
     --background: 240 7% 4%;
     --foreground: 240 5% 92%;
 
@@ -15,8 +69,8 @@
     --popover: 240 5% 12%;
     --popover-foreground: 240 5% 92%;
 
-    --primary: 258 90% 66%;
-    --primary-foreground: 240 5% 92%;
+    --primary: 43 96% 56%;
+    --primary-foreground: 240 7% 4%;
 
     --secondary: 240 5% 12%;
     --secondary-foreground: 240 5% 92%;
@@ -24,19 +78,16 @@
     --muted: 240 5% 12%;
     --muted-foreground: 240 3% 62%;
 
-    --accent: 258 90% 66%;
-    --accent-foreground: 240 5% 92%;
+    --accent: 43 96% 56%;
+    --accent-foreground: 240 7% 4%;
 
     --destructive: 0 100% 61%;
     --destructive-foreground: 240 5% 92%;
 
     --border: 240 5% 13%;
     --input: 240 5% 13%;
-    --ring: 258 90% 66%;
+    --ring: 43 96% 56%;
 
-    --radius: 0.75rem;
-
-    /* SBX Custom Tokens */
     --sbx-base: 240 7% 4%;
     --sbx-card: 240 6% 8%;
     --sbx-elevated: 240 5% 12%;
@@ -45,17 +96,9 @@
     --sbx-text-primary: 240 5% 92%;
     --sbx-text-secondary: 240 3% 62%;
     --sbx-text-tertiary: 240 3% 35%;
-    --sbx-accent: 258 90% 66%;
-    --sbx-accent-hover: 258 80% 59%;
-
-    --sidebar-background: 240 6% 8%;
-    --sidebar-foreground: 240 5% 92%;
-    --sidebar-primary: 258 90% 66%;
-    --sidebar-primary-foreground: 240 5% 92%;
-    --sidebar-accent: 240 5% 12%;
-    --sidebar-accent-foreground: 240 5% 92%;
-    --sidebar-border: 240 5% 13%;
-    --sidebar-ring: 258 90% 66%;
+    --sbx-accent: 43 96% 56%;
+    --sbx-accent-hover: 43 90% 48%;
+    --sbx-gold: 43 96% 56%;
   }
 }
 
@@ -79,12 +122,20 @@
 @layer components {
   .sbx-card {
     @apply bg-card rounded-2xl border border-border;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .dark .sbx-card {
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.2);
   }
 
   .sbx-card:hover {
     transform: scale(1.02);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  }
+
+  .dark .sbx-card:hover {
     box-shadow: 0 12px 40px rgba(0,0,0,0.4);
   }
 
@@ -105,13 +156,29 @@
   }
 
   .sbx-glow {
-    box-shadow: 0 0 20px rgba(139,92,246,0.25);
+    box-shadow: 0 0 20px hsl(43 96% 56% / 0.25);
   }
 
   .frosted-glass {
-    background: rgba(10,10,12,0.5);
+    background: rgba(255,255,255,0.6);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+  }
+
+  .dark .frosted-glass {
+    background: rgba(10,10,12,0.5);
+  }
+
+  .frosted-nav {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  .dark .frosted-nav {
+    background: rgba(10,10,12,0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
   }
 }
 
@@ -139,5 +206,11 @@
   }
   .border-sbx-subtle {
     border-color: hsl(var(--sbx-border-subtle));
+  }
+  .text-gold {
+    color: hsl(var(--sbx-gold));
+  }
+  .fill-gold {
+    fill: hsl(var(--sbx-gold));
   }
 }
