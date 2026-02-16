@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
-import ThemeToggle from "./ThemeToggle";
 import sbxLogo from "@/assets/sbx-logo.png";
 
 const navLinks = [
@@ -41,7 +40,6 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <ThemeToggle />
             <Link
               to="/contact"
               className="hidden md:inline-flex items-center px-5 py-2 bg-foreground text-background text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity duration-200"
