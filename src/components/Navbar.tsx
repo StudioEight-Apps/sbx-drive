@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 
@@ -25,12 +25,21 @@ const Navbar = () => {
             SBX
           </Link>
 
-          <button
-            className="text-white"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            <Menu size={24} />
-          </button>
+          <div className="flex items-center gap-4">
+            <a
+              href="sms:+13058902051"
+              className="text-white hover:text-accent transition-colors"
+              aria-label="Text SBX"
+            >
+              <MessageCircle size={22} />
+            </a>
+            <button
+              className="text-white"
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >
+              <Menu size={24} />
+            </button>
+          </div>
         </div>
       </nav>
 
