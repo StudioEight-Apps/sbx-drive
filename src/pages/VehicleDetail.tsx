@@ -94,8 +94,8 @@ const VehicleDetail = () => {
                 <span className="text-sm font-semibold text-foreground">{vehicle.rating}</span>
               </div>
               {vehicle.noDeposit && (
-                <span className="px-3 py-1 rounded-lg text-[10px] font-semibold bg-foreground/[0.08] text-foreground/70">
-                  No Deposit
+                <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-500 text-white">
+                  Guest Favorite
                 </span>
               )}
             </div>

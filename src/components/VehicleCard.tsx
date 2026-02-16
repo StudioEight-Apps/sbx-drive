@@ -27,8 +27,6 @@ const VehicleCard = ({ vehicle, index = 0 }: Props) => {
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
 
         {/* Favorite button */}
         <button
@@ -41,10 +39,10 @@ const VehicleCard = ({ vehicle, index = 0 }: Props) => {
           />
         </button>
 
-        {/* No Deposit badge */}
+        {/* Guest Favorite badge */}
         {vehicle.noDeposit && (
-          <span className="absolute top-3 left-3 px-3 py-1 rounded-lg text-[10px] font-semibold bg-foreground/[0.08] text-foreground/70 backdrop-blur-sm">
-            No Deposit
+          <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-500 text-white">
+            Guest Favorite
           </span>
         )}
       </div>
