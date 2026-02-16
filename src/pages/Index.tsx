@@ -35,7 +35,7 @@ const Index = () => {
       <section className="relative h-[70vh] min-h-[480px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroCarImg} alt="Exotic car Miami" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/85" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 pb-12 w-full">
