@@ -3,7 +3,7 @@ import miamiImg from "@/assets/miami-about.jpg";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const stats = [
-  { value: "17+", label: "Years in Miami" },
+  { value: "20+", label: "Years in Miami" },
   { value: "96K+", label: "Instagram Followers" },
   { value: "500+", label: "Completed Rentals" },
   { value: "24/7", label: "Concierge Support" },

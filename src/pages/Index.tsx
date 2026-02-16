@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Truck, Gauge, Phone, Shield } from "lucide-react";
+import { Fuel, Gauge, Truck, ShieldCheck, BadgeDollarSign, Clock } from "lucide-react";
 import heroCarImg from "@/assets/hero-car.jpg";
 import { vehicles, brands, bodyTypes } from "@/data/vehicles";
 import VehicleCard from "@/components/VehicleCard";
@@ -9,15 +9,17 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const stats = [
   { value: "96K+", label: "Instagram Followers" },
-  { value: "17", label: "Years in Miami" },
+  { value: "20+", label: "Years in Miami" },
   { value: "500+", label: "Rentals Completed" },
 ];
 
 const valueProps = [
-  { icon: Shield, title: "No Deposit Required", desc: "Drive off with zero upfront deposit" },
-  { icon: Truck, title: "Free Delivery", desc: "We bring the car to you anywhere in Miami" },
-  { icon: Gauge, title: "Unlimited Miles", desc: "No mileage caps on any rental" },
-  { icon: Phone, title: "24/7 Concierge", desc: "Round-the-clock support whenever you need" },
+  { icon: Fuel, title: "Free Gas" },
+  { icon: Gauge, title: "Unlimited Miles" },
+  { icon: Truck, title: "Free Delivery" },
+  { icon: ShieldCheck, title: "VIP Concierge" },
+  { icon: BadgeDollarSign, title: "Multiple Discounts" },
+  { icon: Clock, title: "24/7 Support" },
 ];
 
 const Index = () => {
@@ -113,14 +115,15 @@ const Index = () => {
       </section>
 
       {/* Value Props */}
-      <section className="bg-card py-16">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <section className="bg-card py-14">
+        <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-10 md:gap-14">
           {valueProps.map((vp) => (
             <ScrollReveal key={vp.title}>
-              <div className="text-center">
-                <vp.icon size={24} className="mx-auto mb-3 text-muted-foreground" />
-                <h3 className="text-sm font-semibold text-foreground mb-1">{vp.title}</h3>
-                <p className="text-[13px] text-muted-foreground">{vp.desc}</p>
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-16 h-16 rounded-full border border-gold/30 flex items-center justify-center">
+                  <vp.icon size={26} className="text-gold" />
+                </div>
+                <span className="text-sm font-medium text-gold italic">{vp.title}</span>
               </div>
             </ScrollReveal>
           ))}
