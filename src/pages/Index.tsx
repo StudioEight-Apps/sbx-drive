@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Fuel, Gauge, Truck, ShieldCheck, BadgeDollarSign, Clock } from "lucide-react";
+import { Fuel, Gauge, Truck, ShieldCheck, BadgeDollarSign, Clock, ArrowDownWideNarrow } from "lucide-react";
 import heroCarImg from "@/assets/hero-car.jpg";
 import { vehicles } from "@/data/vehicles";
 import VehicleCard from "@/components/VehicleCard";
@@ -28,12 +28,15 @@ const brandOptions = ["All Brands", "Lamborghini", "Ferrari", "McLaren", "Rolls 
 const Index = () => {
   const [activeBodyType, setActiveBodyType] = useState("All");
   const [selectedBrand, setSelectedBrand] = useState("All Brands");
+  const [sortHighToLow, setSortHighToLow] = useState(false);
 
-  const filtered = vehicles.filter((v) => {
-    const bodyMatch = activeBodyType === "All" || v.type === activeBodyType;
-    const brandMatch = selectedBrand === "All Brands" || v.brand === selectedBrand;
-    return bodyMatch && brandMatch;
-  });
+  const filtered = vehicles
+    .filter((v) => {
+      const bodyMatch = activeBodyType === "All" || v.type === activeBodyType;
+      const brandMatch = selectedBrand === "All Brands" || v.brand === selectedBrand;
+      return bodyMatch && brandMatch;
+    })
+    .sort((a, b) => (sortHighToLow ? b.pricePerDay - a.pricePerDay : 0));
 
   return (
     <main>
@@ -121,14 +124,26 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Sort + Grid */}
+        <div className="flex items-center justify-end mb-4">
+          <button
+            onClick={() => setSortHighToLow(!sortHighToLow)}
+            className={`flex items-center gap-1.5 text-[13px] font-medium transition-colors ${
+              sortHighToLow ? "text-accent" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <ArrowDownWideNarrow size={14} />
+            Price: High to Low
+          </button>
+        </div>
+
+        <div className="flex flex-col gap-4">
           {filtered.length > 0 ? (
             filtered.map((v, i) => (
               <VehicleCard key={v.id} vehicle={v} index={i} />
             ))
           ) : (
-            <p className="col-span-full text-center text-muted-foreground py-12">No vehicles match your filters.</p>
+            <p className="text-center text-muted-foreground py-12">No vehicles match your filters.</p>
           )}
         </div>
       </section>
