@@ -6,7 +6,6 @@ import heroCarImg from "@/assets/hero-car.jpg";
 import { vehicles } from "@/data/vehicles";
 import VehicleCard from "@/components/VehicleCard";
 import ScrollReveal from "@/components/ScrollReveal";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const stats = [
   { value: "96K+", label: "Instagram Followers" },
@@ -105,20 +104,21 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Brand Dropdown */}
-        <div className="mt-3 mb-8">
-          <Select value={selectedBrand} onValueChange={setSelectedBrand}>
-            <SelectTrigger className="w-full bg-card border-white/10 rounded-lg text-foreground">
-              <SelectValue placeholder="All Brands" />
-            </SelectTrigger>
-            <SelectContent className="bg-card border-white/10">
-              {brandOptions.map((brand) => (
-                <SelectItem key={brand} value={brand} className="text-foreground focus:bg-accent/10 focus:text-foreground">
-                  {brand}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        {/* Brand Pills */}
+        <div className="flex items-center gap-3 overflow-x-auto pb-6 mt-3 scrollbar-hide">
+          {brandOptions.map((brand) => (
+            <button
+              key={brand}
+              onClick={() => setSelectedBrand(brand)}
+              className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
+                selectedBrand === brand
+                  ? "bg-accent text-black"
+                  : "bg-transparent border border-white/15 text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {brand}
+            </button>
+          ))}
         </div>
 
         {/* Grid */}
