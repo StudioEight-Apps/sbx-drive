@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Fuel, Gauge, Truck, ShieldCheck, BadgeDollarSign, Clock } from "lucide-react";
 import heroCarImg from "@/assets/hero-car.jpg";
-import { vehicles, categoryPills } from "@/data/vehicles";
+import { vehicles } from "@/data/vehicles";
 import VehicleCard from "@/components/VehicleCard";
 import ScrollReveal from "@/components/ScrollReveal";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const stats = [
   { value: "96K+", label: "Instagram Followers" },
@@ -22,16 +23,17 @@ const valueProps = [
   { icon: Clock, title: "24/7 Support" },
 ];
 
-const brandChips = ["All", "Lamborghini", "Ferrari", "McLaren", "Rolls Royce", "Bentley", "Porsche"];
+const bodyTypePills = ["All", "SUV", "Coupe", "Convertible", "Sedan"];
+const brandOptions = ["All Brands", "Lamborghini", "Ferrari", "McLaren", "Rolls Royce", "Bentley", "Porsche"];
 
 const Index = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [selectedBrand, setSelectedBrand] = useState("All");
+  const [activeBodyType, setActiveBodyType] = useState("All");
+  const [selectedBrand, setSelectedBrand] = useState("All Brands");
 
   const filtered = vehicles.filter((v) => {
-    const categoryMatch = activeCategory === "All" || v.type === activeCategory;
-    const brandMatch = selectedBrand === "All" || v.brand === selectedBrand;
-    return categoryMatch && brandMatch;
+    const bodyMatch = activeBodyType === "All" || v.type === activeBodyType;
+    const brandMatch = selectedBrand === "All Brands" || v.brand === selectedBrand;
+    return bodyMatch && brandMatch;
   });
 
   return (
@@ -86,41 +88,38 @@ const Index = () => {
 
       {/* Fleet Browsing */}
       <section className="max-w-7xl mx-auto px-6 pt-16 pb-12">
-        {/* Category Pills */}
+        {/* Body Type Pills */}
         <div className="flex items-center gap-3 overflow-x-auto pb-4 scrollbar-hide">
-          {categoryPills.map((cat) => (
+          {bodyTypePills.map((type) => (
             <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
+              key={type}
+              onClick={() => setActiveBodyType(type)}
               className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
-                activeCategory === cat
+                activeBodyType === type
                   ? "bg-accent text-black"
                   : "bg-transparent border border-white/15 text-muted-foreground hover:text-foreground"
               }`}
             >
-              {cat}
+              {type}
             </button>
           ))}
         </div>
 
-        {/* Brand Chips */}
-        <div className="flex items-center gap-3 overflow-x-auto pb-4 mt-3 scrollbar-hide">
-          {brandChips.map((brand) => (
-            <button
-              key={brand}
-              onClick={() => setSelectedBrand(brand)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
-                selectedBrand === brand
-                  ? "bg-accent/10 border border-accent text-foreground"
-                  : "bg-card border border-white/10 text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {brand}
-            </button>
-          ))}
+        {/* Brand Dropdown */}
+        <div className="mt-3 mb-8">
+          <Select value={selectedBrand} onValueChange={setSelectedBrand}>
+            <SelectTrigger className="w-full bg-card border-white/10 rounded-lg text-foreground">
+              <SelectValue placeholder="All Brands" />
+            </SelectTrigger>
+            <SelectContent className="bg-card border-white/10">
+              {brandOptions.map((brand) => (
+                <SelectItem key={brand} value={brand} className="text-foreground focus:bg-accent/10 focus:text-foreground">
+                  {brand}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
-
-        <div className="mb-8" />
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
