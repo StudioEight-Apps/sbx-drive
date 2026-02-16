@@ -1,12 +1,24 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Fuel, Gauge, Truck, ShieldCheck, BadgeDollarSign, Clock } from "lucide-react";
+import { Fuel, Gauge, Truck, ShieldCheck, BadgeDollarSign, Clock, DollarSign, Car, LayoutGrid } from "lucide-react";
 import heroCarImg from "@/assets/hero-car.jpg";
 import { vehicles } from "@/data/vehicles";
 import VehicleCard from "@/components/VehicleCard";
 import ScrollReveal from "@/components/ScrollReveal";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Slider } from "@/components/ui/slider";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+
+import ferrariLogo from "@/assets/brands/ferrari.svg";
+import lamborghiniLogo from "@/assets/brands/lamborghini.svg";
+import mclarenLogo from "@/assets/brands/mclaren.svg";
+import mercedesLogo from "@/assets/brands/mercedes.svg";
+import rollsroyceLogo from "@/assets/brands/rollsroyce.svg";
+import bentleyLogo from "@/assets/brands/bentley.svg";
+import porscheLogo from "@/assets/brands/porsche.svg";
+import chevroletLogo from "@/assets/brands/chevrolet.svg";
 
 const stats = [
   { value: "96K+", label: "Instagram Followers" },
@@ -23,17 +35,31 @@ const valueProps = [
   { icon: Clock, title: "24/7 Support" },
 ];
 
-const bodyTypePills = ["All", "SUV", "Coupe", "Convertible", "Sedan"];
-const brandOptions = ["All Brands", "Lamborghini", "Ferrari", "McLaren", "Rolls Royce", "Bentley", "Porsche"];
+const brandData = [
+  { name: "Lamborghini", logo: lamborghiniLogo },
+  { name: "Ferrari", logo: ferrariLogo },
+  { name: "McLaren", logo: mclarenLogo },
+  { name: "Rolls Royce", logo: rollsroyceLogo },
+  { name: "Bentley", logo: bentleyLogo },
+  { name: "Porsche", logo: porscheLogo },
+  { name: "Mercedes-Benz", logo: mercedesLogo },
+  { name: "Chevrolet", logo: chevroletLogo },
+];
+
+const bodyStyles = ["SUV", "Sedan", "Coupe", "Convertible"];
+
+const maxPrice = 3000;
 
 const Index = () => {
-  const [activeBodyType, setActiveBodyType] = useState("All");
-  const [selectedBrand, setSelectedBrand] = useState("All Brands");
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+  const [selectedBodyStyle, setSelectedBodyStyle] = useState<string | null>(null);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, maxPrice]);
 
   const filtered = vehicles.filter((v) => {
-    const bodyMatch = activeBodyType === "All" || v.type === activeBodyType;
-    const brandMatch = selectedBrand === "All Brands" || v.brand === selectedBrand;
-    return bodyMatch && brandMatch;
+    const brandMatch = !selectedBrand || v.brand === selectedBrand;
+    const bodyMatch = !selectedBodyStyle || v.type === selectedBodyStyle;
+    const priceMatch = v.pricePerDay >= priceRange[0] && v.pricePerDay <= priceRange[1];
+    return brandMatch && bodyMatch && priceMatch;
   });
 
   return (
@@ -88,37 +114,136 @@ const Index = () => {
 
       {/* Fleet Browsing */}
       <section className="max-w-7xl mx-auto px-6 pt-16 pb-12">
-        {/* Body Type Pills */}
-        <div className="flex items-center gap-3 overflow-x-auto pb-4 scrollbar-hide">
-          {bodyTypePills.map((type) => (
-            <button
-              key={type}
-              onClick={() => setActiveBodyType(type)}
-              className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
-                activeBodyType === type
-                  ? "bg-accent text-black"
-                  : "bg-transparent border border-white/15 text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {type}
-            </button>
-          ))}
-        </div>
+        {/* Filter Pills */}
+        <div className="flex items-center gap-3 pb-6">
+          {/* Price Pill */}
+          <Popover>
+            <PopoverTrigger asChild>
+              <button className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                priceRange[0] > 0 || priceRange[1] < maxPrice
+                  ? "bg-white text-black border-2 border-accent"
+                  : "bg-white text-black border border-white/20"
+              }`}>
+                <DollarSign size={16} />
+                Price
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-80 bg-[#1A1A1A] border-white/10 rounded-xl shadow-2xl" align="start">
+              <div className="space-y-4">
+                <h4 className="text-sm font-semibold text-foreground">Price Range (per day)</h4>
+                <Slider
+                  min={0}
+                  max={maxPrice}
+                  step={100}
+                  value={priceRange}
+                  onValueChange={(val) => setPriceRange(val as [number, number])}
+                  className="w-full"
+                />
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <span>${priceRange[0]}</span>
+                  <span>${priceRange[1]}</span>
+                </div>
+                {(priceRange[0] > 0 || priceRange[1] < maxPrice) && (
+                  <button
+                    onClick={() => setPriceRange([0, maxPrice])}
+                    className="text-xs text-accent hover:underline"
+                  >
+                    Reset
+                  </button>
+                )}
+              </div>
+            </PopoverContent>
+          </Popover>
 
-        {/* Brand Dropdown */}
-        <div className="mt-3 mb-8">
-          <Select value={selectedBrand} onValueChange={setSelectedBrand}>
-            <SelectTrigger className="w-full bg-card border-white/10 rounded-lg text-foreground">
-              <SelectValue placeholder="All Brands" />
-            </SelectTrigger>
-            <SelectContent className="bg-card border-white/10">
-              {brandOptions.map((brand) => (
-                <SelectItem key={brand} value={brand} className="text-foreground focus:bg-accent/10 focus:text-foreground">
-                  {brand}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          {/* Brand Pill */}
+          <Popover>
+            <PopoverTrigger asChild>
+              <button className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                selectedBrand
+                  ? "bg-white text-black border-2 border-accent"
+                  : "bg-white text-black border border-white/20"
+              }`}>
+                <Car size={16} />
+                {selectedBrand || "Brand"}
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-72 bg-[#1A1A1A] border-white/10 rounded-xl shadow-2xl" align="start">
+              <div className="space-y-3">
+                <h4 className="text-sm font-semibold text-foreground">Select Brand</h4>
+                <button
+                  onClick={() => setSelectedBrand(null)}
+                  className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                    !selectedBrand ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                  }`}
+                >
+                  All Brands
+                </button>
+                <div className="grid grid-cols-2 gap-2">
+                  {brandData.map((brand) => (
+                    <button
+                      key={brand.name}
+                      onClick={() => setSelectedBrand(brand.name)}
+                      className={`flex flex-col items-center gap-2 p-3 rounded-lg transition-all duration-200 ${
+                        selectedBrand === brand.name
+                          ? "bg-accent/10 border border-accent"
+                          : "bg-white/5 border border-transparent hover:border-white/10"
+                      }`}
+                    >
+                      <img src={brand.logo} alt={brand.name} className="w-9 h-9 object-contain" />
+                      <span className="text-xs font-medium text-foreground">{brand.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
+
+          {/* Body Style Pill */}
+          <Popover>
+            <PopoverTrigger asChild>
+              <button className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                selectedBodyStyle
+                  ? "bg-white text-black border-2 border-accent"
+                  : "bg-white text-black border border-white/20"
+              }`}>
+                <LayoutGrid size={16} />
+                {selectedBodyStyle || "Body Style"}
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-64 bg-[#1A1A1A] border-white/10 rounded-xl shadow-2xl" align="start">
+              <div className="space-y-3">
+                <h4 className="text-sm font-semibold text-foreground">Body Style</h4>
+                <RadioGroup
+                  value={selectedBodyStyle || ""}
+                  onValueChange={(val) => setSelectedBodyStyle(val || null)}
+                >
+                  <button
+                    onClick={() => setSelectedBodyStyle(null)}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                      !selectedBodyStyle ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                    }`}
+                  >
+                    <div className="w-4 h-4 rounded-full border border-current flex items-center justify-center">
+                      {!selectedBodyStyle && <div className="w-2.5 h-2.5 rounded-full bg-current" />}
+                    </div>
+                    <span>All</span>
+                  </button>
+                  {bodyStyles.map((style) => (
+                    <label
+                      key={style}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm cursor-pointer transition-colors ${
+                        selectedBodyStyle === style ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                      }`}
+                    >
+                      <RadioGroupItem value={style} className="border-current text-current" />
+                      <Car size={16} className="opacity-50" />
+                      <span>{style}</span>
+                    </label>
+                  ))}
+                </RadioGroup>
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
 
         {/* Grid */}
