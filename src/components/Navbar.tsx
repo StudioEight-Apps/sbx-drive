@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
-import sbxLogo from "@/assets/sbx-logo.png";
 
 const navLinks = [
   { to: "/fleet", label: "Fleet" },
@@ -13,50 +12,29 @@ const navLinks = [
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
 
   return (
     <>
-      <nav className="fixed top-4 left-4 right-4 z-50 frosted-nav border border-border/50 rounded-2xl">
-        <div className="max-w-7xl mx-auto px-5 h-14 flex items-center justify-between">
-          <Link to="/">
-            <img src={sbxLogo} alt="SBX" className="h-12 w-auto" />
+      <nav className="fixed top-0 left-0 right-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <Link
+            to="/"
+            className="text-[20px] font-bold tracking-[3px] text-white"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+          >
+            SBX
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  location.pathname === link.to
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Link
-              to="/contact"
-              className="hidden md:inline-flex items-center px-5 py-2 bg-foreground text-background text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity duration-200"
-            >
-              Reserve Now
-            </Link>
-            <button
-              className="md:hidden text-foreground"
-              onClick={() => setMobileOpen(!mobileOpen)}
-            >
-              <Menu size={24} />
-            </button>
-          </div>
+          <button
+            className="text-white"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            <Menu size={24} />
+          </button>
         </div>
       </nav>
 
-      {/* Mobile Drawer — rendered via portal to escape nav clipping */}
+      {/* Slide-out drawer */}
       {createPortal(
         <AnimatePresence>
           {mobileOpen && (
@@ -73,7 +51,7 @@ const Navbar = () => {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="fixed inset-y-0 right-0 w-72 bg-background border-l border-border z-[70] p-8 flex flex-col gap-6 md:hidden shadow-2xl"
+                className="fixed inset-y-0 right-0 w-72 bg-background border-l border-border z-[70] p-8 flex flex-col gap-6 shadow-2xl"
               >
                 <button
                   onClick={() => setMobileOpen(false)}
