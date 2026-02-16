@@ -155,5 +155,7 @@ export const vehicles: Vehicle[] = [
   },
 ];
 
-export const brands = ["All", "Lamborghini", "Rolls Royce", "Ferrari", "Mercedes-Benz", "Bentley", "Chevrolet"];
-export const bodyTypes = ["All", "SUV", "Sports", "Luxury"];
+export const brands = ["All Brands", "Lamborghini", "Ferrari", "Rolls Royce", "Bentley", "Mercedes-Benz", "Chevrolet"];
+export const bodyTypes = ["All", "SUV", "Sports", "Luxury", "Convertible"];
+export const categoryPills = ["All", "SUV", "Sports", "Luxury", "Convertible"];
+export const dropdownBodyTypes = ["All Types", "Coupe", "Convertible", "SUV", "Sedan"];

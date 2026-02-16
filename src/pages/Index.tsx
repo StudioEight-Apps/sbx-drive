@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Fuel, Gauge, Truck, ShieldCheck, BadgeDollarSign, Clock } from "lucide-react";
 import heroCarImg from "@/assets/hero-car.jpg";
-import { vehicles, brands, bodyTypes } from "@/data/vehicles";
+import { vehicles, categoryPills, dropdownBodyTypes } from "@/data/vehicles";
 import VehicleCard from "@/components/VehicleCard";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -22,16 +22,23 @@ const valueProps = [
   { icon: Clock, title: "24/7 Support" },
 ];
 
-const Index = () => {
-  const [activeType, setActiveType] = useState("All");
+const brandOptions = ["All Brands", "Lamborghini", "Ferrari", "McLaren", "Rolls Royce", "Bentley", "Porsche"];
 
-  const filtered = activeType === "All"
-    ? vehicles
-    : vehicles.filter((v) => v.type === activeType);
+const Index = () => {
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [selectedBrand, setSelectedBrand] = useState("All Brands");
+  const [selectedBodyType, setSelectedBodyType] = useState("All Types");
+
+  const filtered = vehicles.filter((v) => {
+    const categoryMatch = activeCategory === "All" || v.type === activeCategory;
+    const brandMatch = selectedBrand === "All Brands" || v.brand === selectedBrand;
+    const bodyMatch = selectedBodyType === "All Types" || v.type === selectedBodyType;
+    return categoryMatch && brandMatch && bodyMatch;
+  });
 
   return (
     <main>
-      {/* Compact Hero */}
+      {/* Hero */}
       <section className="relative h-[70vh] min-h-[480px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroCarImg} alt="Exotic car Miami" className="w-full h-full object-cover" />
@@ -51,7 +58,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.1] text-gold mb-4"
+            className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.1] text-accent mb-4"
           >
             Redefined.
           </motion.h1>
@@ -59,7 +66,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base text-white/70 mb-6 max-w-md"
+            className="text-sm text-muted-foreground mb-6 max-w-md"
           >
             Miami's most trusted fleet since 2008. No deposit. No hassle. Just drive.
           </motion.p>
@@ -67,7 +74,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex items-center gap-6 text-[13px] text-white/50"
+            className="flex items-center gap-6 text-[13px] text-muted-foreground"
           >
             {stats.map((s, i) => (
               <span key={s.label}>
@@ -79,38 +86,56 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Category Tabs + Fleet Grid */}
-      <section className="max-w-7xl mx-auto px-6 py-12">
-        {/* Tabs */}
-        <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
-          <div className="flex items-center gap-1 p-1 bg-card rounded-full border border-border">
-            {bodyTypes.map((type) => (
-              <button
-                key={type}
-                onClick={() => setActiveType(type)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  activeType === type
-                    ? "bg-foreground text-background"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
-          <Link
-            to="/fleet"
-            className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors"
+      {/* Fleet Browsing */}
+      <section className="max-w-7xl mx-auto px-6 pt-16 pb-12">
+        {/* Category Pills */}
+        <div className="flex items-center gap-3 overflow-x-auto pb-4 scrollbar-hide">
+          {categoryPills.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
+                activeCategory === cat
+                  ? "bg-accent text-black"
+                  : "bg-transparent border border-white/15 text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Dropdown Filters */}
+        <div className="flex items-center gap-3 mt-4 mb-8">
+          <select
+            value={selectedBrand}
+            onChange={(e) => setSelectedBrand(e.target.value)}
+            className="flex-1 sm:flex-none sm:w-48 px-4 py-2.5 rounded-lg bg-card border border-white/10 text-foreground text-sm appearance-none cursor-pointer focus:outline-none focus:border-accent"
           >
-            View All →
-          </Link>
+            {brandOptions.map((b) => (
+              <option key={b} value={b}>{b}</option>
+            ))}
+          </select>
+          <select
+            value={selectedBodyType}
+            onChange={(e) => setSelectedBodyType(e.target.value)}
+            className="flex-1 sm:flex-none sm:w-48 px-4 py-2.5 rounded-lg bg-card border border-white/10 text-foreground text-sm appearance-none cursor-pointer focus:outline-none focus:border-accent"
+          >
+            {dropdownBodyTypes.map((t) => (
+              <option key={t} value={t}>{t}</option>
+            ))}
+          </select>
         </div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {filtered.map((v, i) => (
-            <VehicleCard key={v.id} vehicle={v} index={i} />
-          ))}
+          {filtered.length > 0 ? (
+            filtered.map((v, i) => (
+              <VehicleCard key={v.id} vehicle={v} index={i} />
+            ))
+          ) : (
+            <p className="col-span-full text-center text-muted-foreground py-12">No vehicles match your filters.</p>
+          )}
         </div>
       </section>
 
