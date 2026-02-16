@@ -6,99 +6,57 @@
 
 @layer base {
   :root {
-    --background: 40 20% 97%;
-    --foreground: 40 10% 10%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
 
-    --card: 40 15% 93%;
-    --card-foreground: 40 10% 10%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 40 15% 95%;
-    --popover-foreground: 40 10% 10%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 40 10% 10%;
-    --primary-foreground: 40 20% 97%;
+    --primary: 199 76% 61%;
+    --primary-foreground: 0 0% 4%;
 
-    --secondary: 40 10% 90%;
-    --secondary-foreground: 40 10% 10%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 64%;
 
-    --muted: 40 10% 90%;
-    --muted-foreground: 40 5% 45%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 64%;
 
-    --accent: 40 10% 10%;
-    --accent-foreground: 40 20% 97%;
+    --accent: 199 76% 61%;
+    --accent-foreground: 0 0% 4%;
 
     --destructive: 0 100% 61%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 10% 87%;
-    --input: 40 10% 87%;
-    --ring: 43 96% 56%;
+    --border: 0 0% 100% / 0.06;
+    --input: 0 0% 100% / 0.06;
+    --ring: 199 76% 61%;
 
     --radius: 0.75rem;
 
     /* SBX Custom Tokens */
-    --sbx-base: 40 20% 97%;
-    --sbx-card: 40 15% 93%;
-    --sbx-elevated: 40 12% 89%;
-    --sbx-border: 40 10% 87%;
-    --sbx-border-subtle: 40 8% 80%;
-    --sbx-text-primary: 40 10% 10%;
-    --sbx-text-secondary: 40 5% 45%;
-    --sbx-text-tertiary: 40 4% 60%;
-    --sbx-accent: 43 96% 56%;
-    --sbx-accent-hover: 43 90% 48%;
-    --sbx-gold: 43 96% 56%;
+    --sbx-base: 0 0% 4%;
+    --sbx-card: 0 0% 8%;
+    --sbx-elevated: 0 0% 12%;
+    --sbx-border: 0 0% 100% / 0.06;
+    --sbx-border-subtle: 0 0% 100% / 0.1;
+    --sbx-text-primary: 0 0% 100%;
+    --sbx-text-secondary: 0 0% 64%;
+    --sbx-text-tertiary: 0 0% 45%;
+    --sbx-accent: 199 76% 61%;
+    --sbx-accent-hover: 199 70% 50%;
+    --sbx-gold: 199 76% 61%;
 
-    --sidebar-background: 40 15% 93%;
-    --sidebar-foreground: 40 10% 10%;
-    --sidebar-primary: 43 96% 56%;
-    --sidebar-primary-foreground: 40 10% 10%;
-    --sidebar-accent: 40 10% 90%;
-    --sidebar-accent-foreground: 40 10% 10%;
-    --sidebar-border: 40 10% 87%;
-    --sidebar-ring: 43 96% 56%;
-  }
-
-  .dark {
-    --background: 240 7% 4%;
-    --foreground: 240 5% 92%;
-
-    --card: 240 6% 8%;
-    --card-foreground: 240 5% 92%;
-
-    --popover: 240 5% 12%;
-    --popover-foreground: 240 5% 92%;
-
-    --primary: 43 96% 56%;
-    --primary-foreground: 240 7% 4%;
-
-    --secondary: 240 5% 12%;
-    --secondary-foreground: 240 5% 92%;
-
-    --muted: 240 5% 12%;
-    --muted-foreground: 240 3% 62%;
-
-    --accent: 43 96% 56%;
-    --accent-foreground: 240 7% 4%;
-
-    --destructive: 0 100% 61%;
-    --destructive-foreground: 240 5% 92%;
-
-    --border: 240 5% 13%;
-    --input: 240 5% 13%;
-    --ring: 43 96% 56%;
-
-    --sbx-base: 240 7% 4%;
-    --sbx-card: 240 6% 8%;
-    --sbx-elevated: 240 5% 12%;
-    --sbx-border: 240 5% 13%;
-    --sbx-border-subtle: 240 4% 17%;
-    --sbx-text-primary: 240 5% 92%;
-    --sbx-text-secondary: 240 3% 62%;
-    --sbx-text-tertiary: 240 3% 35%;
-    --sbx-accent: 43 96% 56%;
-    --sbx-accent-hover: 43 90% 48%;
-    --sbx-gold: 43 96% 56%;
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 199 76% 61%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 100% / 0.06;
+    --sidebar-ring: 199 76% 61%;
   }
 }
 
@@ -112,35 +70,35 @@
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: #A3A3A3;
   }
 
   html {
     scroll-behavior: smooth;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #FFFFFF;
+  }
 }
 
 @layer components {
   .sbx-card {
-    @apply bg-card rounded-2xl border border-border;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .dark .sbx-card {
+    background-color: #141414;
+    @apply rounded-2xl;
+    border: 1px solid rgba(255,255,255,0.06);
     box-shadow: 0 2px 16px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.2);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .sbx-card:hover {
     transform: scale(1.02);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-  }
-
-  .dark .sbx-card:hover {
     box-shadow: 0 12px 40px rgba(0,0,0,0.4);
   }
 
   .sbx-label {
-    @apply text-[11px] font-semibold uppercase tracking-[0.08em] text-sbx-tertiary;
+    @apply text-[11px] font-semibold uppercase tracking-[0.08em];
+    color: #A3A3A3;
   }
 
   .sbx-pill {
@@ -152,30 +110,26 @@
   }
 
   .sbx-pill-inactive {
-    @apply bg-card border border-border text-muted-foreground hover:text-foreground;
+    background-color: #141414;
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #A3A3A3;
+  }
+
+  .sbx-pill-inactive:hover {
+    color: #FFFFFF;
   }
 
   .sbx-glow {
-    box-shadow: 0 0 20px hsl(43 96% 56% / 0.25);
+    box-shadow: 0 0 20px hsl(199 76% 61% / 0.25);
   }
 
   .frosted-glass {
-    background: rgba(255,255,255,0.6);
+    background: rgba(10,10,10,0.5);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
 
-  .dark .frosted-glass {
-    background: rgba(10,10,12,0.5);
-  }
-
   .frosted-nav {
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-  }
-
-  .dark .frosted-nav {
     background: rgba(10,10,12,0.7);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -184,28 +138,28 @@
 
 @layer utilities {
   .text-sbx-primary {
-    color: hsl(var(--sbx-text-primary));
+    color: #FFFFFF;
   }
   .text-sbx-secondary {
-    color: hsl(var(--sbx-text-secondary));
+    color: #A3A3A3;
   }
   .text-sbx-tertiary {
     color: hsl(var(--sbx-text-tertiary));
   }
   .bg-sbx-base {
-    background-color: hsl(var(--sbx-base));
+    background-color: #0A0A0A;
   }
   .bg-sbx-card {
-    background-color: hsl(var(--sbx-card));
+    background-color: #141414;
   }
   .bg-sbx-elevated {
     background-color: hsl(var(--sbx-elevated));
   }
   .border-sbx {
-    border-color: hsl(var(--sbx-border));
+    border-color: rgba(255,255,255,0.06);
   }
   .border-sbx-subtle {
-    border-color: hsl(var(--sbx-border-subtle));
+    border-color: rgba(255,255,255,0.1);
   }
   .text-gold {
     color: hsl(var(--sbx-gold));
