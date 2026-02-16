@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import ThemeToggle from "./ThemeToggle";
+import sbxLogo from "@/assets/sbx-logo.jpg";
 
 const navLinks = [
   { to: "/fleet", label: "Fleet" },
@@ -19,8 +20,8 @@ const Navbar = () => {
     <>
       <nav className="fixed top-4 left-4 right-4 z-50 frosted-nav border border-border/50 rounded-2xl">
         <div className="max-w-7xl mx-auto px-5 h-14 flex items-center justify-between">
-          <Link to="/" className="text-xl font-bold tracking-tight text-foreground">
-            SBX
+          <Link to="/">
+            <img src={sbxLogo} alt="SBX" className="h-8 w-auto" />
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
