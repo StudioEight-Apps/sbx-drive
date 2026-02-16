@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Fuel, Gauge, Truck, ShieldCheck, BadgeDollarSign, Clock } from "lucide-react";
 import heroCarImg from "@/assets/hero-car.jpg";
-import { vehicles, categoryPills, dropdownBodyTypes } from "@/data/vehicles";
+import { vehicles, categoryPills } from "@/data/vehicles";
 import VehicleCard from "@/components/VehicleCard";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -22,18 +22,16 @@ const valueProps = [
   { icon: Clock, title: "24/7 Support" },
 ];
 
-const brandOptions = ["All Brands", "Lamborghini", "Ferrari", "McLaren", "Rolls Royce", "Bentley", "Porsche"];
+const brandChips = ["All", "Lamborghini", "Ferrari", "McLaren", "Rolls Royce", "Bentley", "Porsche"];
 
 const Index = () => {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [selectedBrand, setSelectedBrand] = useState("All Brands");
-  const [selectedBodyType, setSelectedBodyType] = useState("All Types");
+  const [selectedBrand, setSelectedBrand] = useState("All");
 
   const filtered = vehicles.filter((v) => {
     const categoryMatch = activeCategory === "All" || v.type === activeCategory;
-    const brandMatch = selectedBrand === "All Brands" || v.brand === selectedBrand;
-    const bodyMatch = selectedBodyType === "All Types" || v.type === selectedBodyType;
-    return categoryMatch && brandMatch && bodyMatch;
+    const brandMatch = selectedBrand === "All" || v.brand === selectedBrand;
+    return categoryMatch && brandMatch;
   });
 
   return (
@@ -105,27 +103,24 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Dropdown Filters */}
-        <div className="flex items-center gap-3 mt-4 mb-8">
-          <select
-            value={selectedBrand}
-            onChange={(e) => setSelectedBrand(e.target.value)}
-            className="flex-1 sm:flex-none sm:w-48 px-4 py-2.5 rounded-lg bg-card border border-white/10 text-foreground text-sm appearance-none cursor-pointer focus:outline-none focus:border-accent"
-          >
-            {brandOptions.map((b) => (
-              <option key={b} value={b}>{b}</option>
-            ))}
-          </select>
-          <select
-            value={selectedBodyType}
-            onChange={(e) => setSelectedBodyType(e.target.value)}
-            className="flex-1 sm:flex-none sm:w-48 px-4 py-2.5 rounded-lg bg-card border border-white/10 text-foreground text-sm appearance-none cursor-pointer focus:outline-none focus:border-accent"
-          >
-            {dropdownBodyTypes.map((t) => (
-              <option key={t} value={t}>{t}</option>
-            ))}
-          </select>
+        {/* Brand Chips */}
+        <div className="flex items-center gap-3 overflow-x-auto pb-4 mt-3 scrollbar-hide">
+          {brandChips.map((brand) => (
+            <button
+              key={brand}
+              onClick={() => setSelectedBrand(brand)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
+                selectedBrand === brand
+                  ? "bg-accent/10 border border-accent text-foreground"
+                  : "bg-card border border-white/10 text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {brand}
+            </button>
+          ))}
         </div>
+
+        <div className="mb-8" />
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
