@@ -15,8 +15,8 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <nav className="fixed top-4 left-4 right-4 z-50 bg-background/50 backdrop-blur-md rounded-2xl">
+        <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
           <Link
             to="/"
             className="text-[20px] font-bold tracking-[3px] text-white"
