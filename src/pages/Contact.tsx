@@ -15,14 +15,12 @@ const Contact = () => {
   return (
     <main className="pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
-        {/* Left */}
         <ScrollReveal>
           <div>
             <h1 className="text-3xl font-bold text-foreground mb-3">Get in Touch</h1>
             <p className="text-[15px] text-muted-foreground mb-10">
               Ready to ride? Reach out and we'll have your car waiting.
             </p>
-
             <div className="space-y-4">
               {contactInfo.map((item) => (
                 <div key={item.label} className="sbx-card p-4 flex items-center gap-4 hover:transform-none">
@@ -30,7 +28,7 @@ const Contact = () => {
                   <div>
                     <div className="sbx-label mb-0.5">{item.label}</div>
                     {item.href ? (
-                      <a href={item.href} className="text-sm text-foreground hover:text-primary transition-colors">
+                      <a href={item.href} className="text-sm text-foreground hover:text-gold transition-colors">
                         {item.value}
                       </a>
                     ) : (
@@ -43,7 +41,6 @@ const Contact = () => {
           </div>
         </ScrollReveal>
 
-        {/* Right — Form */}
         <ScrollReveal>
           <form
             onSubmit={(e) => {
@@ -58,18 +55,18 @@ const Contact = () => {
                 type={field === "Email" ? "email" : field === "Phone" ? "tel" : "text"}
                 placeholder={field}
                 required={field !== "Phone"}
-                className="w-full bg-background border border-border rounded-[10px] px-4 py-3 text-foreground placeholder:text-sbx-tertiary text-sm outline-none focus:border-primary transition-colors"
+                className="w-full bg-background border border-border rounded-[10px] px-4 py-3 text-foreground placeholder:text-muted-foreground text-sm outline-none focus:border-foreground transition-colors"
               />
             ))}
             <textarea
               placeholder="Message"
               rows={5}
               required
-              className="w-full bg-background border border-border rounded-[10px] px-4 py-3 text-foreground placeholder:text-sbx-tertiary text-sm outline-none focus:border-primary transition-colors resize-none"
+              className="w-full bg-background border border-border rounded-[10px] px-4 py-3 text-foreground placeholder:text-muted-foreground text-sm outline-none focus:border-foreground transition-colors resize-none"
             />
             <button
               type="submit"
-              className="w-full py-3.5 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-[hsl(var(--sbx-accent-hover))] transition-all duration-200 hover:shadow-[0_0_20px_rgba(139,92,246,0.25)]"
+              className="w-full py-3.5 bg-foreground text-background font-bold rounded-xl hover:opacity-90 transition-all duration-200"
             >
               {submitted ? "Message Sent ✓" : "Send Message"}
             </button>

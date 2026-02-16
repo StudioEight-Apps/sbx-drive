@@ -21,7 +21,6 @@ const VehicleDetail = () => {
     );
   }
 
-  // Use same image 4 times as gallery placeholders
   const photos = [vehicle.image, vehicle.image, vehicle.image, vehicle.image];
 
   const specs = [
@@ -32,7 +31,7 @@ const VehicleDetail = () => {
   ];
 
   return (
-    <main className="pt-20 pb-20">
+    <main className="pt-20 pb-28 md:pb-20">
       <div className="max-w-7xl mx-auto px-6">
         {/* Gallery */}
         <div className="relative rounded-2xl overflow-hidden h-[280px] md:h-[400px] mb-4 group">
@@ -49,7 +48,6 @@ const VehicleDetail = () => {
             />
           </AnimatePresence>
 
-          {/* Nav arrows */}
           <button
             onClick={() => setPhotoIndex((i) => (i - 1 + photos.length) % photos.length)}
             className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full frosted-glass flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
@@ -63,7 +61,6 @@ const VehicleDetail = () => {
             <ChevronRight size={18} className="text-foreground" />
           </button>
 
-          {/* Counter */}
           <div className="absolute top-4 right-4 frosted-glass px-3 py-1 rounded-full text-xs font-medium text-foreground">
             {photoIndex + 1} / {photos.length}
           </div>
@@ -130,56 +127,26 @@ const VehicleDetail = () => {
             </div>
           </div>
 
-          {/* Right — Booking Card */}
-          <div className="lg:sticky lg:top-24 h-fit">
-            <div className="sbx-card p-6 hover:transform-none hover:shadow-[0_2px_16px_rgba(0,0,0,0.3)]">
-              <div className="mb-6">
-                <span className="sbx-label">FROM</span>
-                <div className="mt-1">
-                  <span className="text-[32px] font-bold text-foreground">${vehicle.pricePerDay.toLocaleString()}</span>
-                  <span className="text-sm text-sbx-tertiary">/day</span>
-                </div>
-              </div>
-
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center gap-3 bg-background rounded-[10px] border border-border px-4 py-3">
-                  <Calendar size={16} className="text-sbx-tertiary" />
-                  <input
-                    type="text"
-                    placeholder="Pickup Date"
-                    className="bg-transparent text-foreground placeholder:text-sbx-tertiary text-sm w-full outline-none"
-                  />
-                </div>
-                <div className="flex items-center gap-3 bg-background rounded-[10px] border border-border px-4 py-3">
-                  <Calendar size={16} className="text-sbx-tertiary" />
-                  <input
-                    type="text"
-                    placeholder="Return Date"
-                    className="bg-transparent text-foreground placeholder:text-sbx-tertiary text-sm w-full outline-none"
-                  />
-                </div>
-                <div className="flex items-center gap-3 bg-background rounded-[10px] border border-border px-4 py-3">
-                  <MapPin size={16} className="text-sbx-tertiary" />
-                  <input
-                    type="text"
-                    placeholder="Pickup Location"
-                    defaultValue="Miami, FL"
-                    className="bg-transparent text-foreground placeholder:text-sbx-tertiary text-sm w-full outline-none"
-                  />
-                </div>
-              </div>
-
-              <button
-                onClick={() => setShowModal(true)}
-                className="w-full py-3.5 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-[hsl(var(--sbx-accent-hover))] transition-all duration-200 hover:shadow-[0_0_20px_rgba(139,92,246,0.25)]"
-              >
-                Request Booking
-              </button>
-
-              <p className="text-center text-[13px] text-sbx-tertiary mt-4">Or call (305) 890-2051</p>
-              <p className="text-center text-xs text-sbx-tertiary mt-1">No deposit required · Free cancellation</p>
-            </div>
+          {/* Right — Booking Card (desktop) */}
+          <div className="hidden md:block lg:sticky lg:top-24 h-fit">
+            <BookingCard vehicle={vehicle} onBook={() => setShowModal(true)} />
           </div>
+        </div>
+      </div>
+
+      {/* Mobile sticky booking bar */}
+      <div className="fixed bottom-0 left-0 right-0 md:hidden frosted-nav border-t border-border p-4 z-40">
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <span className="text-xl font-bold text-foreground">${vehicle.pricePerDay.toLocaleString()}</span>
+            <span className="text-xs text-muted-foreground">/day</span>
+          </div>
+          <button
+            onClick={() => setShowModal(true)}
+            className="flex-1 py-3 bg-foreground text-background font-bold rounded-xl transition-opacity hover:opacity-90"
+          >
+            Request Booking
+          </button>
         </div>
       </div>
 
@@ -198,11 +165,11 @@ const VehicleDetail = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-card rounded-3xl p-8 max-w-md w-full border border-border shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
+              className="bg-card rounded-3xl p-8 max-w-md w-full border border-border shadow-[0_16px_48px_rgba(0,0,0,0.15)]"
             >
               <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 rounded-full border-2 border-primary flex items-center justify-center">
-                  <Check size={28} className="text-primary" />
+                <div className="w-16 h-16 rounded-full border-2 border-foreground flex items-center justify-center">
+                  <Check size={28} className="text-foreground" />
                 </div>
               </div>
               <h2 className="text-[22px] font-bold text-foreground text-center mb-2">Booking Requested</h2>
@@ -211,11 +178,11 @@ const VehicleDetail = () => {
               </p>
               <button
                 onClick={() => setShowModal(false)}
-                className="w-full py-3 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-[hsl(var(--sbx-accent-hover))] transition-colors"
+                className="w-full py-3 bg-foreground text-background font-bold rounded-xl hover:opacity-90 transition-opacity"
               >
                 Done
               </button>
-              <p className="text-center text-[13px] text-sbx-tertiary mt-3">Call to confirm: (305) 890-2051</p>
+              <p className="text-center text-[13px] text-muted-foreground mt-3">Call to confirm: (305) 890-2051</p>
             </motion.div>
           </motion.div>
         )}
@@ -223,5 +190,42 @@ const VehicleDetail = () => {
     </main>
   );
 };
+
+const BookingCard = ({ vehicle, onBook }: { vehicle: { pricePerDay: number }; onBook: () => void }) => (
+  <div className="sbx-card p-6 hover:transform-none">
+    <div className="mb-6">
+      <span className="sbx-label">FROM</span>
+      <div className="mt-1">
+        <span className="text-[32px] font-bold text-foreground">${vehicle.pricePerDay.toLocaleString()}</span>
+        <span className="text-sm text-muted-foreground">/day</span>
+      </div>
+    </div>
+
+    <div className="space-y-3 mb-6">
+      <div className="flex items-center gap-3 bg-background rounded-[10px] border border-border px-4 py-3">
+        <Calendar size={16} className="text-muted-foreground" />
+        <input type="text" placeholder="Pickup Date" className="bg-transparent text-foreground placeholder:text-muted-foreground text-sm w-full outline-none" />
+      </div>
+      <div className="flex items-center gap-3 bg-background rounded-[10px] border border-border px-4 py-3">
+        <Calendar size={16} className="text-muted-foreground" />
+        <input type="text" placeholder="Return Date" className="bg-transparent text-foreground placeholder:text-muted-foreground text-sm w-full outline-none" />
+      </div>
+      <div className="flex items-center gap-3 bg-background rounded-[10px] border border-border px-4 py-3">
+        <MapPin size={16} className="text-muted-foreground" />
+        <input type="text" placeholder="Pickup Location" defaultValue="Miami, FL" className="bg-transparent text-foreground placeholder:text-muted-foreground text-sm w-full outline-none" />
+      </div>
+    </div>
+
+    <button
+      onClick={onBook}
+      className="w-full py-3.5 bg-foreground text-background font-bold rounded-xl hover:opacity-90 transition-all duration-200"
+    >
+      Request Booking
+    </button>
+
+    <p className="text-center text-[13px] text-muted-foreground mt-4">Or call (305) 890-2051</p>
+    <p className="text-center text-xs text-muted-foreground mt-1">No deposit required · Free cancellation</p>
+  </div>
+);
 
 export default VehicleDetail;

@@ -26,7 +26,6 @@ const Index = () => {
     <main>
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background image */}
         <div className="absolute inset-0">
           <img src={heroCarImg} alt="Exotic car Miami" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
@@ -46,7 +45,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.1] text-primary mb-6"
+              className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.1] text-gold mb-6"
             >
               Redefined.
             </motion.h1>
@@ -66,13 +65,13 @@ const Index = () => {
             >
               <Link
                 to="/fleet"
-                className="px-7 py-3 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-[hsl(var(--sbx-accent-hover))] transition-all duration-200 hover:shadow-[0_0_20px_rgba(139,92,246,0.25)]"
+                className="px-7 py-3 bg-foreground text-background font-semibold rounded-xl hover:opacity-90 transition-opacity duration-200"
               >
                 Browse Fleet
               </Link>
               <a
                 href="tel:+13058902051"
-                className="px-7 py-3 border border-[hsl(var(--sbx-border-subtle))] text-foreground font-semibold rounded-xl hover:border-muted-foreground transition-colors duration-200"
+                className="px-7 py-3 border border-border text-foreground font-semibold rounded-xl hover:border-muted-foreground transition-colors duration-200"
               >
                 Call (305) 890-2051
               </a>
@@ -86,7 +85,7 @@ const Index = () => {
         <div className="max-w-4xl mx-auto px-6 py-12 flex justify-center gap-8 md:gap-16">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <div className="text-sm font-medium text-sbx-tertiary">
+              <div className="text-sm font-medium text-muted-foreground">
                 <span className="text-foreground font-semibold">{s.value}</span> {s.label}
               </div>
             </div>
@@ -114,12 +113,12 @@ const Index = () => {
       {/* Value Props */}
       <section className="bg-card py-20">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {valueProps.map((vp, i) => (
+          {valueProps.map((vp) => (
             <ScrollReveal key={vp.title}>
               <div className="text-center">
                 <vp.icon size={24} className="mx-auto mb-3 text-muted-foreground" />
                 <h3 className="text-sm font-semibold text-foreground mb-1">{vp.title}</h3>
-                <p className="text-[13px] text-sbx-tertiary">{vp.desc}</p>
+                <p className="text-[13px] text-muted-foreground">{vp.desc}</p>
               </div>
             </ScrollReveal>
           ))}
@@ -131,12 +130,12 @@ const Index = () => {
         <ScrollReveal>
           <h2 className="text-[28px] font-bold text-foreground mb-2">Follow the Fleet</h2>
           <p className="text-lg font-medium text-muted-foreground mb-1">@sbxrentals</p>
-          <p className="text-[13px] text-sbx-tertiary mb-6">96,000+ followers</p>
+          <p className="text-[13px] text-muted-foreground mb-6">96,000+ followers</p>
           <a
             href="https://instagram.com/sbxrentals"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-7 py-3 border border-[hsl(var(--sbx-border-subtle))] text-foreground font-semibold rounded-xl hover:border-muted-foreground transition-colors duration-200"
+            className="inline-block px-7 py-3 border border-border text-foreground font-semibold rounded-xl hover:border-muted-foreground transition-colors duration-200"
           >
             Follow on Instagram
           </a>

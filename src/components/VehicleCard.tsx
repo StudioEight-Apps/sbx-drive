@@ -37,13 +37,13 @@ const VehicleCard = ({ vehicle, index = 0 }: Props) => {
         >
           <Heart
             size={16}
-            className={liked ? "fill-primary text-primary" : "text-foreground"}
+            className={liked ? "fill-gold text-gold" : "text-foreground"}
           />
         </button>
 
         {/* No Deposit badge */}
         {vehicle.noDeposit && (
-          <span className="absolute top-3 left-3 px-3 py-1 rounded-lg text-[10px] font-semibold bg-foreground/[0.08] text-foreground/70">
+          <span className="absolute top-3 left-3 px-3 py-1 rounded-lg text-[10px] font-semibold bg-foreground/[0.08] text-foreground/70 backdrop-blur-sm">
             No Deposit
           </span>
         )}
@@ -69,7 +69,7 @@ const VehicleCard = ({ vehicle, index = 0 }: Props) => {
 
         <Link
           to={`/fleet/${vehicle.slug}`}
-          className="block w-full text-center py-2.5 rounded-[10px] bg-sbx-elevated text-foreground text-[13px] font-semibold hover:bg-[hsl(var(--sbx-border-subtle))] transition-colors duration-200"
+          className="block w-full text-center py-2.5 rounded-[10px] bg-muted text-foreground text-[13px] font-semibold hover:bg-border transition-colors duration-200"
         >
           View Details
         </Link>

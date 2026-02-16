@@ -156,4 +156,4 @@ export const vehicles: Vehicle[] = [
 ];
 
 export const brands = ["All", "Lamborghini", "Rolls Royce", "Ferrari", "Mercedes-Benz", "Bentley", "Chevrolet"];
-export const bodyTypes = ["All", "Exotic", "SUV", "Sports", "Luxury"];
+export const bodyTypes = ["All", "SUV", "Sports", "Luxury"];

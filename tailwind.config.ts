@@ -63,6 +63,7 @@ export default {
         sbx: {
           tertiary: "hsl(var(--sbx-text-tertiary))",
         },
+        gold: "hsl(var(--sbx-gold))",
       },
       borderRadius: {
         lg: "var(--radius)",
