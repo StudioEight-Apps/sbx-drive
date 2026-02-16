@@ -74,7 +74,7 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-y-0 right-0 w-72 bg-card border-l border-border z-50 p-8 flex flex-col gap-6 md:hidden"
+              className="fixed inset-y-0 right-0 w-72 bg-background border-l border-border z-50 p-8 flex flex-col gap-6 md:hidden shadow-2xl"
             >
               <button
                 onClick={() => setMobileOpen(false)}
