@@ -30,6 +30,7 @@ const valueProps = [
 ];
 
 const bodyTypePills = ["All", "SUV", "Coupe", "Convertible", "Sedan"];
+const brandPills = ["All Brands", "Lamborghini", "Ferrari", "McLaren", "Rolls Royce", "Bentley", "Porsche", "Mercedes-Benz", "Chevrolet"];
 
 const brandLogos = [
   { name: "Lamborghini", logo: lamborghiniLogo },
@@ -93,10 +94,9 @@ const Index = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex items-center gap-6 text-[13px] text-muted-foreground"
           >
-            {stats.map((s, i) => (
+            {stats.map((s) => (
               <span key={s.label}>
                 <span className="text-white font-semibold">{s.value}</span> {s.label}
-                {i < stats.length - 1 && <span className="ml-6">·</span>}
               </span>
             ))}
           </motion.div>
@@ -120,49 +120,23 @@ const Index = () => {
               {type}
             </button>
           ))}
+        </div>
 
-          <Popover>
-            <PopoverTrigger asChild>
-              <button
-                className={`flex items-center gap-1.5 px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
-                  selectedBrand !== "All Brands"
-                    ? "bg-accent text-black"
-                    : "bg-transparent border border-white/15 text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {selectedBrand === "All Brands" ? "Brand" : selectedBrand}
-                <ChevronDown size={14} />
-              </button>
-            </PopoverTrigger>
-            <PopoverContent
-              className="w-[280px] bg-[#1A1A1A] border-white/10 rounded-xl p-4"
-              align="start"
+        {/* Brand Pills */}
+        <div className="flex items-center gap-3 overflow-x-auto pb-4 mt-1 scrollbar-hide">
+          {brandPills.map((brand) => (
+            <button
+              key={brand}
+              onClick={() => setSelectedBrand(brand)}
+              className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
+                selectedBrand === brand
+                  ? "bg-accent text-black"
+                  : "bg-transparent border border-white/15 text-muted-foreground hover:text-foreground"
+              }`}
             >
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  onClick={() => setSelectedBrand("All Brands")}
-                  className={`flex flex-col items-center gap-1.5 p-3 rounded-lg transition-colors ${
-                    selectedBrand === "All Brands" ? "bg-white/10" : "hover:bg-white/5"
-                  }`}
-                >
-                  <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-muted-foreground">All</div>
-                  <span className="text-[11px] text-muted-foreground">All Brands</span>
-                </button>
-                {brandLogos.map((b) => (
-                  <button
-                    key={b.name}
-                    onClick={() => setSelectedBrand(b.name)}
-                    className={`flex flex-col items-center gap-1.5 p-3 rounded-lg transition-colors ${
-                      selectedBrand === b.name ? "bg-white/10" : "hover:bg-white/5"
-                    }`}
-                  >
-                    <img src={b.logo} alt={b.name} className="w-9 h-9" />
-                    <span className="text-[11px] text-muted-foreground">{b.name}</span>
-                  </button>
-                ))}
-              </div>
-            </PopoverContent>
-          </Popover>
+              {brand}
+            </button>
+          ))}
         </div>
 
         {/* Sort + Grid */}
