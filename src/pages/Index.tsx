@@ -9,10 +9,8 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import lamborghiniLogo from "@/assets/brands/lamborghini.svg";
 import ferrariLogo from "@/assets/brands/ferrari.svg";
-import mclarenLogo from "@/assets/brands/mclaren.svg";
 import rollsroyceLogo from "@/assets/brands/rollsroyce.svg";
-import bentleyLogo from "@/assets/brands/bentley.svg";
-import porscheLogo from "@/assets/brands/porsche.svg";
+import mercedesLogo from "@/assets/brands/mercedes.svg";
 
 const stats = [
   { value: "100K+", label: "Followers" },
@@ -29,16 +27,14 @@ const valueProps = [
   { icon: Clock, title: "24/7 Support" },
 ];
 
-const bodyTypePills = ["All", "SUV", "Coupe", "Convertible", "Sedan"];
-const brandPills = ["All Brands", "Lamborghini", "Ferrari", "McLaren", "Rolls Royce", "Bentley", "Porsche", "Mercedes-Benz", "Chevrolet"];
+const bodyTypePills = ["All", "Exotic", "SUV", "Luxury"];
+const brandPills = ["All Brands", "Lamborghini", "Ferrari", "Rolls Royce", "Mercedes-Benz"];
 
 const brandLogos = [
   { name: "Lamborghini", logo: lamborghiniLogo },
   { name: "Ferrari", logo: ferrariLogo },
-  { name: "McLaren", logo: mclarenLogo },
   { name: "Rolls Royce", logo: rollsroyceLogo },
-  { name: "Bentley", logo: bentleyLogo },
-  { name: "Porsche", logo: porscheLogo },
+  { name: "Mercedes-Benz", logo: mercedesLogo },
 ];
 
 const Index = () => {

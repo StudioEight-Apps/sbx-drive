@@ -4,11 +4,11 @@ import { vehicles, brands, bodyTypes } from "@/data/vehicles";
 import VehicleCard from "@/components/VehicleCard";
 
 const Fleet = () => {
-  const [activeBrand, setActiveBrand] = useState("All");
+  const [activeBrand, setActiveBrand] = useState("All Brands");
   const [activeType, setActiveType] = useState("All");
 
   const filtered = vehicles.filter((v) => {
-    const brandMatch = activeBrand === "All" || v.brand === activeBrand;
+    const brandMatch = activeBrand === "All Brands" || v.brand === activeBrand;
     const typeMatch = activeType === "All" || v.type === activeType;
     return brandMatch && typeMatch;
   });
