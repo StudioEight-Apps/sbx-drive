@@ -4,11 +4,11 @@ import { vehicles, brands, bodyTypes } from "@/data/vehicles";
 import VehicleCard from "@/components/VehicleCard";
 
 const Fleet = () => {
-  const [activeBrand, setActiveBrand] = useState("All Breeds");
+  const [activeBrand, setActiveBrand] = useState("All");
   const [activeType, setActiveType] = useState("All");
 
   const filtered = vehicles.filter((v) => {
-    const brandMatch = activeBrand === "All Breeds" || v.brand === activeBrand;
+    const brandMatch = activeBrand === "All" || v.brand === activeBrand;
     const typeMatch = activeType === "All" || v.type === activeType;
     return brandMatch && typeMatch;
   });
@@ -18,11 +18,11 @@ const Fleet = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-foreground mb-3">The Clowder</h1>
-          <p className="text-base text-muted-foreground">Browse our collection. Adopt in minutes.</p>
+          <h1 className="text-4xl font-bold text-foreground mb-3">The Fleet</h1>
+          <p className="text-base text-muted-foreground">Browse our collection. Book in minutes.</p>
         </div>
 
-        {/* Breed Filter */}
+        {/* Brand Filter */}
         <div className="flex justify-center gap-6 mb-6 overflow-x-auto pb-2 scrollbar-hide">
           {brands.map((brand) => (
             <button
@@ -79,7 +79,7 @@ const Fleet = () => {
 
         {filtered.length === 0 && (
           <div className="text-center py-20 text-muted-foreground">
-            No cats match your filters.
+            No vehicles match your filters.
           </div>
         )}
       </div>

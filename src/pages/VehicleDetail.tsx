@@ -4,7 +4,7 @@ import { Star, ChevronLeft, ChevronRight, Check, MapPin, Calendar } from "lucide
 import { motion, AnimatePresence } from "framer-motion";
 import { vehicles } from "@/data/vehicles";
 
-const inclusions = ["Free Delivery", "Unlimited Purrs", "Full Insurance", "24/7 Support", "Airport Pickup", "Free Treats"];
+const inclusions = ["Free Delivery", "Unlimited Miles", "Full Insurance", "24/7 Support", "Airport Pickup", "Free Gas"];
 
 const VehicleDetail = () => {
   const { slug } = useParams();
@@ -15,8 +15,8 @@ const VehicleDetail = () => {
   if (!vehicle) {
     return (
       <main className="pt-24 pb-20 text-center">
-        <p className="text-muted-foreground">Cat not found.</p>
-        <Link to="/fleet" className="text-primary mt-4 inline-block">Back to Clowder</Link>
+        <p className="text-muted-foreground">Vehicle not found.</p>
+        <Link to="/fleet" className="text-primary mt-4 inline-block">Back to Fleet</Link>
       </main>
     );
   }
@@ -24,10 +24,10 @@ const VehicleDetail = () => {
   const photos = [vehicle.image, vehicle.image, vehicle.image, vehicle.image];
 
   const specs = [
-    { value: `${vehicle.hp}%`, label: "PURR" },
-    { value: vehicle.zeroToSixty, label: "NAP-TO-ZOOM" },
-    { value: vehicle.topSpeed, label: "ZOOMIE SPEED" },
-    { value: `${vehicle.seats}`, label: "CUDDLE SPOTS" },
+    { value: `${vehicle.hp}`, label: "HP" },
+    { value: vehicle.zeroToSixty, label: "0-60" },
+    { value: vehicle.topSpeed, label: "TOP SPEED" },
+    { value: `${vehicle.seats}`, label: "SEATS" },
   ];
 
   return (
@@ -114,7 +114,7 @@ const VehicleDetail = () => {
 
             <hr className="border-border mb-6" />
 
-            <h3 className="text-lg font-semibold text-foreground mb-3">About this cat</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-3">About this vehicle</h3>
             <p className="text-[15px] text-muted-foreground leading-relaxed mb-6">{vehicle.description}</p>
 
             <hr className="border-border mb-6" />
@@ -145,7 +145,7 @@ const VehicleDetail = () => {
             onClick={() => setShowModal(true)}
             className="flex-1 py-3 bg-foreground text-background font-bold rounded-xl transition-opacity hover:opacity-90"
           >
-            Request Adoption
+            Request Booking
           </button>
         </div>
       </div>
@@ -172,7 +172,7 @@ const VehicleDetail = () => {
                   <Check size={28} className="text-foreground" />
                 </div>
               </div>
-              <h2 className="text-[22px] font-bold text-foreground text-center mb-2">Adoption Requested</h2>
+              <h2 className="text-[22px] font-bold text-foreground text-center mb-2">Booking Requested</h2>
               <p className="text-sm text-muted-foreground text-center mb-6">
                 We'll confirm your {vehicle.name} within the hour.
               </p>
@@ -220,7 +220,7 @@ const BookingCard = ({ vehicle, onBook }: { vehicle: { pricePerDay: number }; on
       onClick={onBook}
       className="w-full py-3.5 bg-foreground text-background font-bold rounded-xl hover:opacity-90 transition-all duration-200"
     >
-      Request Adoption
+      Request Booking
     </button>
 
     <p className="text-center text-[13px] text-muted-foreground mt-4">Or call (305) 890-2051</p>
