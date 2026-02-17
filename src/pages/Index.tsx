@@ -86,7 +86,7 @@ const Index = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-sm text-muted-foreground mb-6 max-w-md"
           >
-            Miami's most trusted fleet since 2008. Miami's most trusted fleet since 2008 — No deposit, no hassle, just drive
+            Miami's most trusted fleet since 2008 — No deposit, no hassle, just drive
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
