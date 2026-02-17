@@ -92,12 +92,12 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex items-center justify-center divide-x divide-white/10 w-full"
+            className="flex items-center justify-center divide-x divide-white/10 w-full max-w-md sm:max-w-none mx-auto"
           >
             {stats.map((s) => (
-              <div key={s.label} className="flex flex-col items-center px-8">
-                <span className="text-white font-bold text-lg">{s.value}</span>
-                <span className="text-[12px] text-[#A3A3A3] whitespace-nowrap">{s.label}</span>
+              <div key={s.label} className="flex flex-col items-center px-4 sm:px-8">
+                <span className="text-white font-bold text-base sm:text-lg">{s.value}</span>
+                <span className="text-[11px] sm:text-[12px] text-[#A3A3A3] whitespace-nowrap">{s.label}</span>
               </div>
             ))}
           </motion.div>
