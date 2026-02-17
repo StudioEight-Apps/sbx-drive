@@ -1,11 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Fuel, Gauge, Truck, ShieldCheck, BadgeDollarSign, Clock, ArrowDownWideNarrow } from "lucide-react";
+import { Fuel, Gauge, Truck, ShieldCheck, BadgeDollarSign, Clock, ArrowDownWideNarrow, ChevronDown } from "lucide-react";
 import heroCarImg from "@/assets/hero-car.jpg";
 import { vehicles } from "@/data/vehicles";
 import VehicleCard from "@/components/VehicleCard";
 import ScrollReveal from "@/components/ScrollReveal";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import lamborghiniLogo from "@/assets/brands/lamborghini.svg";
+import ferrariLogo from "@/assets/brands/ferrari.svg";
+import mclarenLogo from "@/assets/brands/mclaren.svg";
+import rollsroyceLogo from "@/assets/brands/rollsroyce.svg";
+import bentleyLogo from "@/assets/brands/bentley.svg";
+import porscheLogo from "@/assets/brands/porsche.svg";
 
 const stats = [
   { value: "96K+", label: "Instagram Followers" },
@@ -23,7 +30,15 @@ const valueProps = [
 ];
 
 const bodyTypePills = ["All", "SUV", "Coupe", "Convertible", "Sedan"];
-const brandOptions = ["All Brands", "Lamborghini", "Ferrari", "McLaren", "Rolls Royce", "Bentley", "Porsche", "Mercedes-Benz", "Chevrolet"];
+
+const brandLogos = [
+  { name: "Lamborghini", logo: lamborghiniLogo },
+  { name: "Ferrari", logo: ferrariLogo },
+  { name: "McLaren", logo: mclarenLogo },
+  { name: "Rolls Royce", logo: rollsroyceLogo },
+  { name: "Bentley", logo: bentleyLogo },
+  { name: "Porsche", logo: porscheLogo },
+];
 
 const Index = () => {
   const [activeBodyType, setActiveBodyType] = useState("All");
@@ -89,8 +104,8 @@ const Index = () => {
       </section>
 
       {/* Fleet Browsing */}
-      <section className="max-w-7xl mx-auto px-6 pt-16 pb-12">
-        {/* Body Type Pills */}
+      <section className="max-w-7xl mx-auto px-6 pt-6 pb-12">
+        {/* Body Type Pills + Brand Popover */}
         <div className="flex items-center gap-3 overflow-x-auto pb-4 scrollbar-hide">
           {bodyTypePills.map((type) => (
             <button
@@ -105,23 +120,49 @@ const Index = () => {
               {type}
             </button>
           ))}
-        </div>
 
-        {/* Brand Pills */}
-        <div className="flex items-center gap-3 overflow-x-auto pb-6 mt-3 scrollbar-hide">
-          {brandOptions.map((brand) => (
-            <button
-              key={brand}
-              onClick={() => setSelectedBrand(brand)}
-              className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
-                selectedBrand === brand
-                  ? "bg-accent text-black"
-                  : "bg-transparent border border-white/15 text-muted-foreground hover:text-foreground"
-              }`}
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                className={`flex items-center gap-1.5 px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
+                  selectedBrand !== "All Brands"
+                    ? "bg-accent text-black"
+                    : "bg-transparent border border-white/15 text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {selectedBrand === "All Brands" ? "Brand" : selectedBrand}
+                <ChevronDown size={14} />
+              </button>
+            </PopoverTrigger>
+            <PopoverContent
+              className="w-[280px] bg-[#1A1A1A] border-white/10 rounded-xl p-4"
+              align="start"
             >
-              {brand}
-            </button>
-          ))}
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  onClick={() => setSelectedBrand("All Brands")}
+                  className={`flex flex-col items-center gap-1.5 p-3 rounded-lg transition-colors ${
+                    selectedBrand === "All Brands" ? "bg-white/10" : "hover:bg-white/5"
+                  }`}
+                >
+                  <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-muted-foreground">All</div>
+                  <span className="text-[11px] text-muted-foreground">All Brands</span>
+                </button>
+                {brandLogos.map((b) => (
+                  <button
+                    key={b.name}
+                    onClick={() => setSelectedBrand(b.name)}
+                    className={`flex flex-col items-center gap-1.5 p-3 rounded-lg transition-colors ${
+                      selectedBrand === b.name ? "bg-white/10" : "hover:bg-white/5"
+                    }`}
+                  >
+                    <img src={b.logo} alt={b.name} className="w-9 h-9" />
+                    <span className="text-[11px] text-muted-foreground">{b.name}</span>
+                  </button>
+                ))}
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
 
         {/* Sort + Grid */}
@@ -137,13 +178,13 @@ const Index = () => {
           </button>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {filtered.length > 0 ? (
             filtered.map((v, i) => (
-              <VehicleCard key={v.id} vehicle={v} index={i} />
+              <VehicleCard key={v.id} vehicle={v} index={i} showBadge={i === 0} />
             ))
           ) : (
-            <p className="text-center text-muted-foreground py-12">No vehicles match your filters.</p>
+            <p className="text-center text-muted-foreground py-12 col-span-full">No vehicles match your filters.</p>
           )}
         </div>
       </section>

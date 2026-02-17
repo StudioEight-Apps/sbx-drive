@@ -7,9 +7,10 @@ import type { Vehicle } from "@/data/vehicles";
 interface Props {
   vehicle: Vehicle;
   index?: number;
+  showBadge?: boolean;
 }
 
-const VehicleCard = ({ vehicle, index = 0 }: Props) => {
+const VehicleCard = ({ vehicle, index = 0, showBadge = false }: Props) => {
   const [liked, setLiked] = useState(false);
 
   return (
@@ -31,7 +32,7 @@ const VehicleCard = ({ vehicle, index = 0 }: Props) => {
             loading="lazy"
           />
 
-          {vehicle.noDeposit && (
+          {showBadge && (
             <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-semibold bg-accent text-black">
               Guest Favorite
             </span>
