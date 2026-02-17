@@ -6,7 +6,7 @@ const Footer = () => (
       {/* Brand */}
       <div>
         <div className="text-xl font-bold text-foreground mb-2">SBX</div>
-        <p className="text-xs text-sbx-tertiary">South Beach Exotic Rentals</p>
+        <p className="text-xs text-sbx-tertiary">South Beach Exotic Cats</p>
         <p className="text-xs text-sbx-tertiary">Miami, FL · Est. 2008</p>
       </div>
 
@@ -15,7 +15,7 @@ const Footer = () => (
         <h4 className="text-sm font-semibold text-foreground mb-4">Quick Links</h4>
         <div className="flex flex-col gap-2">
           {[
-            { to: "/fleet", label: "Fleet" },
+            { to: "/fleet", label: "Clowder" },
             { to: "/about", label: "About" },
             { to: "/contact", label: "Contact" },
           ].map((l) => (
@@ -31,14 +31,14 @@ const Footer = () => (
         <h4 className="text-sm font-semibold text-foreground mb-4">Contact</h4>
         <div className="flex flex-col gap-2 text-sm text-muted-foreground">
           <a href="tel:+13058902051" className="hover:text-foreground transition-colors">(305) 890-2051</a>
-          <a href="mailto:info@sbxrentals.com" className="hover:text-foreground transition-colors">info@sbxrentals.com</a>
+          <a href="mailto:meow@sbxcats.com" className="hover:text-foreground transition-colors">meow@sbxcats.com</a>
           <span>7620 NW 25th St Unit 2, Miami FL 33122</span>
         </div>
       </div>
     </div>
 
     <div className="border-t border-border py-6 text-center">
-      <p className="text-xs text-sbx-tertiary">© 2026 SBX. All rights reserved.</p>
+      <p className="text-xs text-sbx-tertiary">&copy; 2026 SBX Cats. All rights reserved.</p>
       <div className="flex justify-center gap-6 mt-3">
         {["Instagram", "Facebook", "Twitter"].map((s) => (
           <a key={s} href="#" className="text-xs text-sbx-tertiary hover:text-foreground transition-colors">{s}</a>

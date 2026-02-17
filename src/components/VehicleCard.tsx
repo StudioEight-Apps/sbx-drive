@@ -64,7 +64,7 @@ const VehicleCard = ({ vehicle, index = 0, showBadge = false }: Props) => {
           </div>
 
           <div className="flex items-center justify-between">
-            <span className="text-[13px] text-muted-foreground">{vehicle.type} · {vehicle.hp} HP</span>
+            <span className="text-[13px] text-muted-foreground">{vehicle.type} · {vehicle.hp}% Purr</span>
             <div className="flex items-center gap-1">
               <Star size={12} className="fill-accent text-accent" />
               <span className="text-[13px] font-semibold text-foreground">{vehicle.rating}</span>

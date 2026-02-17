@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 
 const navLinks = [
-  { to: "/fleet", label: "Fleet" },
+  { to: "/fleet", label: "Clowder" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];
@@ -83,7 +83,7 @@ const Navbar = () => {
                   onClick={() => setMobileOpen(false)}
                   className="mt-4 text-center px-5 py-3 bg-foreground text-background font-semibold rounded-xl"
                 >
-                  Reserve Now
+                  Adopt Now
                 </Link>
               </motion.div>
             </>

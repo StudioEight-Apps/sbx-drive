@@ -4,7 +4,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const contactInfo = [
   { icon: Phone, label: "Phone", value: "(305) 890-2051", href: "tel:+13058902051" },
-  { icon: Mail, label: "Email", value: "info@sbxrentals.com", href: "mailto:info@sbxrentals.com" },
+  { icon: Mail, label: "Email", value: "meow@sbxcats.com", href: "mailto:meow@sbxcats.com" },
   { icon: MapPin, label: "Address", value: "7620 NW 25th St Unit 2, Miami FL 33122" },
   { icon: Clock, label: "Hours", value: "Mon–Sun, 9AM – 12AM" },
 ];
@@ -19,7 +19,7 @@ const Contact = () => {
           <div>
             <h1 className="text-3xl font-bold text-foreground mb-3">Get in Touch</h1>
             <p className="text-[15px] text-muted-foreground mb-10">
-              Ready to ride? Reach out and we'll have your car waiting.
+              Ready to purr? Reach out and we'll have your cat waiting.
             </p>
             <div className="space-y-4">
               {contactInfo.map((item) => (
@@ -59,7 +59,7 @@ const Contact = () => {
               />
             ))}
             <textarea
-              placeholder="Message"
+              placeholder="Tell us about your dream cat..."
               rows={5}
               required
               className="w-full bg-background border border-border rounded-[10px] px-4 py-3 text-foreground placeholder:text-muted-foreground text-sm outline-none focus:border-foreground transition-colors resize-none"
@@ -68,7 +68,7 @@ const Contact = () => {
               type="submit"
               className="w-full py-3.5 bg-foreground text-background font-bold rounded-xl hover:opacity-90 transition-all duration-200"
             >
-              {submitted ? "Message Sent ✓" : "Send Message"}
+              {submitted ? "Message Sent" : "Send Message"}
             </button>
           </form>
         </ScrollReveal>

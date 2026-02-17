@@ -1,56 +1,39 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Fuel, Gauge, Truck, ShieldCheck, BadgeDollarSign, Clock, ArrowDownWideNarrow, ChevronDown } from "lucide-react";
-import heroCarImg from "@/assets/hero-car.jpg";
+import { Heart, Sparkles, Truck, ShieldCheck, BadgeDollarSign, Clock, ArrowDownWideNarrow } from "lucide-react";
 import { vehicles } from "@/data/vehicles";
 import VehicleCard from "@/components/VehicleCard";
 import ScrollReveal from "@/components/ScrollReveal";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import lamborghiniLogo from "@/assets/brands/lamborghini.svg";
-import ferrariLogo from "@/assets/brands/ferrari.svg";
-import mclarenLogo from "@/assets/brands/mclaren.svg";
-import rollsroyceLogo from "@/assets/brands/rollsroyce.svg";
-import bentleyLogo from "@/assets/brands/bentley.svg";
-import porscheLogo from "@/assets/brands/porsche.svg";
 
 const stats = [
-  { value: "100K+", label: "Followers" },
-  { value: "20+", label: "Years in Miami" },
-  { value: "2,000+", label: "Trips Completed" },
+  { value: "100K+", label: "Cat Lovers" },
+  { value: "9", label: "Lives Per Cat" },
+  { value: "2,000+", label: "Purrs Delivered" },
 ];
 
 const valueProps = [
-  { icon: Fuel, title: "Free Gas" },
-  { icon: Gauge, title: "Unlimited Miles" },
+  { icon: Heart, title: "Free Cuddles" },
+  { icon: Sparkles, title: "Unlimited Purrs" },
   { icon: Truck, title: "Free Delivery" },
   { icon: ShieldCheck, title: "VIP Concierge" },
   { icon: BadgeDollarSign, title: "Multiple Discounts" },
   { icon: Clock, title: "24/7 Support" },
 ];
 
-const bodyTypePills = ["All", "SUV", "Coupe", "Convertible", "Sedan"];
-const brandPills = ["All Brands", "Lamborghini", "Ferrari", "McLaren", "Rolls Royce", "Bentley", "Porsche", "Mercedes-Benz", "Chevrolet"];
-
-const brandLogos = [
-  { name: "Lamborghini", logo: lamborghiniLogo },
-  { name: "Ferrari", logo: ferrariLogo },
-  { name: "McLaren", logo: mclarenLogo },
-  { name: "Rolls Royce", logo: rollsroyceLogo },
-  { name: "Bentley", logo: bentleyLogo },
-  { name: "Porsche", logo: porscheLogo },
-];
+const bodyTypePills = ["All", "Lap Cat", "Adventure", "Luxury", "Gentle Giant"];
+const breedPills = ["All Breeds", "Persian", "Bengal", "Maine Coon", "British Shorthair", "Siamese", "Ragdoll", "Abyssinian", "Scottish Fold"];
 
 const Index = () => {
   const [activeBodyType, setActiveBodyType] = useState("All");
-  const [selectedBrand, setSelectedBrand] = useState("All Brands");
+  const [selectedBreed, setSelectedBreed] = useState("All Breeds");
   const [sortHighToLow, setSortHighToLow] = useState(false);
 
   const filtered = vehicles
     .filter((v) => {
       const bodyMatch = activeBodyType === "All" || v.type === activeBodyType;
-      const brandMatch = selectedBrand === "All Brands" || v.brand === selectedBrand;
-      return bodyMatch && brandMatch;
+      const breedMatch = selectedBreed === "All Breeds" || v.brand === selectedBreed;
+      return bodyMatch && breedMatch;
     })
     .sort((a, b) => (sortHighToLow ? b.pricePerDay - a.pricePerDay : 0));
 
@@ -59,7 +42,7 @@ const Index = () => {
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[480px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroCarImg} alt="Exotic car Miami" className="w-full h-full object-cover" />
+          <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=1920&h=1080&fit=crop" alt="Exotic cat Miami" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/85" />
         </div>
 
@@ -70,7 +53,7 @@ const Index = () => {
             transition={{ duration: 0.6 }}
             className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.1] text-white"
           >
-            Exotic Rentals
+            Exotic Cats
           </motion.h1>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -86,7 +69,7 @@ const Index = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-sm text-muted-foreground mb-6 max-w-md"
           >
-            Miami's most trusted fleet since 2008. Miami's most trusted fleet since 2008 — No deposit, no hassle, just drive
+            Miami's most purrfect clowder since 2008 — No deposit, no hairballs, just cuddles
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -106,7 +89,7 @@ const Index = () => {
 
       {/* Fleet Browsing */}
       <section className="max-w-7xl mx-auto px-6 pt-6 pb-12">
-        {/* Body Type Pills + Brand Popover */}
+        {/* Body Type Pills */}
         <div className="flex items-center gap-3 overflow-x-auto pb-4 scrollbar-hide">
           {bodyTypePills.map((type) => (
             <button
@@ -123,19 +106,19 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Brand Pills */}
+        {/* Breed Pills */}
         <div className="flex items-center gap-3 overflow-x-auto pb-4 mt-1 scrollbar-hide">
-          {brandPills.map((brand) => (
+          {breedPills.map((breed) => (
             <button
-              key={brand}
-              onClick={() => setSelectedBrand(brand)}
+              key={breed}
+              onClick={() => setSelectedBreed(breed)}
               className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
-                selectedBrand === brand
+                selectedBreed === breed
                   ? "bg-accent text-black"
                   : "bg-transparent border border-white/15 text-muted-foreground hover:text-foreground"
               }`}
             >
-              {brand}
+              {breed}
             </button>
           ))}
         </div>
@@ -159,7 +142,7 @@ const Index = () => {
               <VehicleCard key={v.id} vehicle={v} index={i} showBadge={i === 0} />
             ))
           ) : (
-            <p className="text-center text-muted-foreground py-12 col-span-full">No vehicles match your filters.</p>
+            <p className="text-center text-muted-foreground py-12 col-span-full">No cats match your filters.</p>
           )}
         </div>
       </section>
@@ -183,14 +166,14 @@ const Index = () => {
       {/* CTA Banner */}
       <section className="py-16 text-center">
         <ScrollReveal>
-          <h2 className="text-2xl font-bold text-foreground mb-3">Ready to ride?</h2>
-          <p className="text-muted-foreground mb-6">Book your dream car in under 2 minutes.</p>
+          <h2 className="text-2xl font-bold text-foreground mb-3">Ready to purr?</h2>
+          <p className="text-muted-foreground mb-6">Book your dream cat in under 2 minutes.</p>
           <div className="flex justify-center gap-4">
             <Link
               to="/contact"
               className="px-7 py-3 bg-foreground text-background font-semibold rounded-xl hover:opacity-90 transition-opacity"
             >
-              Reserve Now
+              Adopt Now
             </Link>
             <a
               href="tel:+13058902051"
