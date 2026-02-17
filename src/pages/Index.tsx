@@ -15,9 +15,9 @@ import bentleyLogo from "@/assets/brands/bentley.svg";
 import porscheLogo from "@/assets/brands/porsche.svg";
 
 const stats = [
-  { value: "96K+", label: "Instagram Followers" },
+  { value: "96K+", label: "Followers" },
   { value: "20+", label: "Years in Miami" },
-  { value: "500+", label: "Rentals Completed" },
+  { value: "500+", label: "Rentals" },
 ];
 
 const valueProps = [
@@ -97,7 +97,7 @@ const Index = () => {
             {stats.map((s) => (
               <div key={s.label} className="flex flex-col items-center px-8">
                 <span className="text-white font-bold text-lg">{s.value}</span>
-                <span className="text-[12px] text-[#A3A3A3]">{s.label}</span>
+                <span className="text-[12px] text-[#A3A3A3] whitespace-nowrap">{s.label}</span>
               </div>
             ))}
           </motion.div>
