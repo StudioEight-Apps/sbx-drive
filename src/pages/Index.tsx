@@ -15,9 +15,9 @@ import bentleyLogo from "@/assets/brands/bentley.svg";
 import porscheLogo from "@/assets/brands/porsche.svg";
 
 const stats = [
-  { value: "96K+", label: "Followers" },
+  { value: "100K+", label: "Followers" },
   { value: "20+", label: "Years in Miami" },
-  { value: "500+", label: "Rentals" },
+  { value: "2,000+", label: "Trips Completed" },
 ];
 
 const valueProps = [
