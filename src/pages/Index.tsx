@@ -62,7 +62,7 @@ const Index = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.1] text-accent mb-4"
           >
-            Redefined.
+            Redefined
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -70,7 +70,7 @@ const Index = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-sm text-muted-foreground mb-6 max-w-md"
           >
-            Miami's most trusted fleet since 2008. No deposit. No hassle. Just drive.
+            Miami's most trusted fleet since 2008. Miami's most trusted fleet since 2008 — No deposit, no hassle, just drive
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -137,7 +137,7 @@ const Index = () => {
           </button>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           {filtered.length > 0 ? (
             filtered.map((v, i) => (
               <VehicleCard key={v.id} vehicle={v} index={i} />
