@@ -11,6 +11,8 @@ import lamborghiniLogo from "@/assets/brands/lamborghini.svg";
 import ferrariLogo from "@/assets/brands/ferrari.svg";
 import rollsroyceLogo from "@/assets/brands/rollsroyce.svg";
 import mercedesLogo from "@/assets/brands/mercedes.svg";
+import bentleyLogo from "@/assets/brands/bentley.svg";
+import chevroletLogo from "@/assets/brands/chevrolet.svg";
 
 const stats = [
   { value: "100K+", label: "Followers" },
@@ -27,14 +29,16 @@ const valueProps = [
   { icon: Clock, title: "24/7 Support" },
 ];
 
-const bodyTypePills = ["All", "Exotic", "SUV", "Luxury"];
-const brandPills = ["All Brands", "Lamborghini", "Ferrari", "Rolls Royce", "Mercedes-Benz"];
+const bodyTypePills = ["All", "Exotic", "SUV", "Luxury", "Sports"];
+const brandPills = ["All Brands", "Lamborghini", "Ferrari", "Rolls Royce", "Mercedes-Benz", "Bentley", "Chevrolet"];
 
 const brandLogos = [
   { name: "Lamborghini", logo: lamborghiniLogo },
   { name: "Ferrari", logo: ferrariLogo },
   { name: "Rolls Royce", logo: rollsroyceLogo },
   { name: "Mercedes-Benz", logo: mercedesLogo },
+  { name: "Bentley", logo: bentleyLogo },
+  { name: "Chevrolet", logo: chevroletLogo },
 ];
 
 const Index = () => {

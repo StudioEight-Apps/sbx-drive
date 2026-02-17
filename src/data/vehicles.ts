@@ -1,11 +1,15 @@
 import aventadorImg from "@/assets/vehicles/aventador-s.jpg";
 import huracanImg from "@/assets/vehicles/huracan-evo.jpg";
 import urusImg from "@/assets/vehicles/urus.jpg";
-import ghostImg from "@/assets/vehicles/cullinan.jpg";
-import ferrari458Img from "@/assets/vehicles/ferrari-488.jpg";
+import cullinanImg from "@/assets/vehicles/cullinan.jpg";
+import ferrari488Img from "@/assets/vehicles/ferrari-488.jpg";
 import g63Img from "@/assets/vehicles/g63.jpg";
-import wraithImg from "@/assets/vehicles/continental-gt.jpg";
-import gallardoImg from "@/assets/vehicles/corvette-c8.jpg";
+import corvetteImg from "@/assets/vehicles/corvette-c8.jpg";
+import continentalImg from "@/assets/vehicles/continental-gt.jpg";
+import ghostImg from "@/assets/vehicles/rr-ghost.jpg";
+import wraithImg from "@/assets/vehicles/rr-wraith.jpg";
+import performanteImg from "@/assets/vehicles/lambo-performante.jpg";
+import gallardoImg from "@/assets/vehicles/lambo-gallardo.jpg";
 
 export interface Vehicle {
   id: number;
@@ -39,11 +43,11 @@ export const vehicles: Vehicle[] = [
     noDeposit: true,
     slug: "lamborghini-aventador",
     image: aventadorImg,
-    description: "The Aventador is not just an exotic car — it's an ultra luxury performance vehicle. 740 horsepower, scissor doors, and a naturally aspirated V12 that goes 0–100 km/h in 2.9 seconds. Our cheapest Aventador rental in Miami.",
+    description: "The Aventador is the definition of presence. 740 horsepower, scissor doors, and a naturally aspirated V12 that announces your arrival from three blocks away. Built for Ocean Drive.",
   },
   {
     id: 2,
-    name: "Lamborghini Huracan",
+    name: "Lamborghini Huracan EVO",
     brand: "Lamborghini",
     type: "Exotic",
     pricePerDay: 1800,
@@ -53,12 +57,28 @@ export const vehicles: Vehicle[] = [
     topSpeed: "202 mph",
     rating: 4.8,
     noDeposit: true,
-    slug: "lamborghini-huracan",
+    slug: "lamborghini-huracan-evo",
     image: huracanImg,
-    description: "The Huracan is the driver's Lamborghini — sharper, lighter, and more connected to the road. Available in white, this is one of the most sought-after exotics in our Miami fleet.",
+    description: "The Huracan EVO is the driver's Lamborghini — sharper, lighter, and more connected to the road. Perfect for those who want the thrill without the theater.",
   },
   {
     id: 3,
+    name: "Lamborghini Urus",
+    brand: "Lamborghini",
+    type: "SUV",
+    pricePerDay: 1200,
+    seats: 5,
+    hp: 641,
+    zeroToSixty: "3.5s",
+    topSpeed: "190 mph",
+    rating: 4.9,
+    noDeposit: true,
+    slug: "lamborghini-urus",
+    image: urusImg,
+    description: "Supercar DNA in an SUV body. The Urus handles Miami's scene — valet lines, beach runs, airport pickups — with 641 horsepower and room for five.",
+  },
+  {
+    id: 4,
     name: "Lamborghini Performante",
     brand: "Lamborghini",
     type: "Exotic",
@@ -70,27 +90,27 @@ export const vehicles: Vehicle[] = [
     rating: 4.9,
     noDeposit: true,
     slug: "lamborghini-performante",
-    image: urusImg,
+    image: performanteImg,
     description: "The Performante takes the Huracan to the next level with active aerodynamics and forged composites. Track-bred performance for the streets of Miami.",
   },
   {
-    id: 4,
+    id: 5,
     name: "Lamborghini Gallardo",
     brand: "Lamborghini",
     type: "Exotic",
-    pricePerDay: 1200,
+    pricePerDay: 1000,
     seats: 2,
     hp: 562,
-    zeroToSixty: "4.3s",
+    zeroToSixty: "3.4s",
     topSpeed: "199 mph",
     rating: 4.7,
     noDeposit: true,
     slug: "lamborghini-gallardo",
     image: gallardoImg,
-    description: "The Gallardo catches eyes, turns heads, and could stop traffic. One of the most rented exotic cars in our collection — 0 to 60 in just 4.3 seconds. Available in black.",
+    description: "The Gallardo catches eyes, turns heads, and could stop traffic. Available in black — one of the most iconic Lamborghinis ever made.",
   },
   {
-    id: 5,
+    id: 6,
     name: "Ferrari 458 Spider",
     brand: "Ferrari",
     type: "Exotic",
@@ -102,15 +122,31 @@ export const vehicles: Vehicle[] = [
     rating: 4.8,
     noDeposit: true,
     slug: "ferrari-458-spider",
-    image: ferrari458Img,
-    description: "The 458 Spider is one of the latest additions to our exotic collection. Fitted with navigation, carbon fiber interior, and a 4.5L V8 with 8 cylinders. Michael Schumacher gave his inputs on the design. Rent at the best prices in Miami.",
+    image: ferrari488Img,
+    description: "Open-air Italian excellence. The 458 Spider features a 4.5L V8, carbon fiber interior, and design inputs from Michael Schumacher himself. Rent at the best prices in Miami.",
   },
   {
-    id: 6,
+    id: 7,
+    name: "Rolls Royce Cullinan",
+    brand: "Rolls Royce",
+    type: "SUV",
+    pricePerDay: 1800,
+    seats: 5,
+    hp: 563,
+    zeroToSixty: "4.8s",
+    topSpeed: "155 mph",
+    rating: 5.0,
+    noDeposit: true,
+    slug: "rolls-royce-cullinan",
+    image: cullinanImg,
+    description: "The most luxurious SUV ever built. The Cullinan doesn't just get you there — it makes the journey the destination. Rear-seat champagne cooler included.",
+  },
+  {
+    id: 8,
     name: "Rolls Royce Ghost",
     brand: "Rolls Royce",
     type: "Luxury",
-    pricePerDay: 1800,
+    pricePerDay: 1500,
     seats: 5,
     hp: 563,
     zeroToSixty: "4.6s",
@@ -122,11 +158,11 @@ export const vehicles: Vehicle[] = [
     description: "The most luxurious sedan on the road. The Ghost delivers effortless power and whisper-quiet refinement — the ultimate statement for Miami's most distinguished clientele.",
   },
   {
-    id: 7,
+    id: 9,
     name: "Rolls Royce Wraith",
     brand: "Rolls Royce",
     type: "Luxury",
-    pricePerDay: 1500,
+    pricePerDay: 1400,
     seats: 4,
     hp: 624,
     zeroToSixty: "4.4s",
@@ -138,7 +174,7 @@ export const vehicles: Vehicle[] = [
     description: "The most powerful Rolls Royce ever built. The Wraith combines grand touring elegance with 624 horsepower — the fastback silhouette was born for South Beach.",
   },
   {
-    id: 8,
+    id: 10,
     name: "Mercedes-AMG G63",
     brand: "Mercedes-Benz",
     type: "SUV",
@@ -151,11 +187,43 @@ export const vehicles: Vehicle[] = [
     noDeposit: true,
     slug: "mercedes-amg-g63",
     image: g63Img,
-    description: "The icon. The G-Wagon is Miami's unofficial city car — unmistakable, unstoppable, and available with no deposit. The perfect blend of luxury and presence.",
+    description: "The icon. The G-Wagon is Miami's unofficial city car — unmistakable, unstoppable, and available with no deposit.",
+  },
+  {
+    id: 11,
+    name: "Corvette C8 Stingray",
+    brand: "Chevrolet",
+    type: "Sports",
+    pricePerDay: 600,
+    seats: 2,
+    hp: 495,
+    zeroToSixty: "2.9s",
+    topSpeed: "194 mph",
+    rating: 4.7,
+    noDeposit: true,
+    slug: "corvette-c8-stingray",
+    image: corvetteImg,
+    description: "Mid-engine, 495 horsepower, and the best value in the fleet. The C8 punches way above its price — perfect for first-timers.",
+  },
+  {
+    id: 12,
+    name: "Bentley Continental GT",
+    brand: "Bentley",
+    type: "Luxury",
+    pricePerDay: 1500,
+    seats: 4,
+    hp: 626,
+    zeroToSixty: "3.5s",
+    topSpeed: "207 mph",
+    rating: 4.8,
+    noDeposit: true,
+    slug: "bentley-continental-gt",
+    image: continentalImg,
+    description: "Handcrafted British grand touring. The Continental GT is for the client who wants power wrapped in whisper-quiet luxury.",
   },
 ];
 
-export const brands = ["All Brands", "Lamborghini", "Ferrari", "Rolls Royce", "Mercedes-Benz"];
-export const bodyTypes = ["All", "Exotic", "SUV", "Luxury"];
-export const categoryPills = ["All", "Exotic", "SUV", "Luxury"];
-export const dropdownBodyTypes = ["All Types", "Exotic", "SUV", "Luxury"];
+export const brands = ["All Brands", "Lamborghini", "Ferrari", "Rolls Royce", "Mercedes-Benz", "Bentley", "Chevrolet"];
+export const bodyTypes = ["All", "Exotic", "SUV", "Luxury", "Sports"];
+export const categoryPills = ["All", "Exotic", "SUV", "Luxury", "Sports"];
+export const dropdownBodyTypes = ["All Types", "Exotic", "SUV", "Luxury", "Sports"];
